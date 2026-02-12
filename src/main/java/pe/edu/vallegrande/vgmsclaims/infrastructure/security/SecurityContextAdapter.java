@@ -35,7 +35,7 @@ public class SecurityContextAdapter implements ISecurityContext {
     @Override
     public Mono<Boolean> hasRole(String role) {
         return GatewayHeadersFilter.getCurrentUser()
-                .map(user -> user.hasRole(role))
+                .map(user -> user.getRoles() != null && user.getRoles().contains(role))
                 .defaultIfEmpty(false);
     }
 

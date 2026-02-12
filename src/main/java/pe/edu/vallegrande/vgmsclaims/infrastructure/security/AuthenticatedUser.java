@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Representa la información del usuario autenticado extraída del gateway
@@ -17,44 +17,40 @@ import java.util.Set;
 public class AuthenticatedUser {
 
     private String userId;
-    private String username;
-    private String email;
     private String organizationId;
-    private Set<String> roles;
-    private Set<String> permissions;
+    private String email;
+    private List<String> roles;
 
     /**
-     * Verifica si el usuario tiene un rol específico
+     * Verifica si el usuario es superadministrador
      */
-    public boolean hasRole(String role) {
-        return roles != null && roles.contains(role);
-    }
-
-    /**
-     * Verifica si el usuario tiene un permiso específico
-     */
-    public boolean hasPermission(String permission) {
-        return permissions != null && permissions.contains(permission);
+    public boolean isSuperAdmin() {
+        return roles != null && roles.contains("SUPER_ADMIN");
     }
 
     /**
      * Verifica si el usuario es administrador
      */
     public boolean isAdmin() {
-        return hasRole("ADMIN") || hasRole("ROLE_ADMIN");
+        return roles != null && (roles.contains("ADMIN") || roles.contains("SUPER_ADMIN"));
     }
 
     /**
-     * Verifica si el usuario es superadministrador
+     * Verifica si el usuario pertenece a una organización
      */
-    public boolean isSuperAdmin() {
-        return hasRole("SUPERADMIN") || hasRole("ROLE_SUPERADMIN");
+    public boolean belongsToOrganization(String orgId) {
+        if (isSuperAdmin()) return true;
+        return organizationId != null && organizationId.equals(orgId);
     }
 
     /**
-     * Verifica si el usuario es cliente
+     * Verifica si el usuario puede crear un rol específico
      */
-    public boolean isClient() {
-        return hasRole("CLIENT") || hasRole("ROLE_CLIENT");
+    public boolean canCreateRole(String role) {
+        if (isSuperAdmin()) return true;
+        if (isAdmin()) {
+            return !"SUPER_ADMIN".equals(role) && !"ADMIN".equals(role);
+        }
+        return false;
     }
 }
