@@ -45,10 +45,10 @@ public class AuthenticatedUser {
     }
 
     /**
-     * Verifica si el usuario es técnico
+     * Verifica si el usuario es superadministrador
      */
-    public boolean isTechnician() {
-        return hasRole("TECHNICIAN") || hasRole("ROLE_TECHNICIAN");
+    public boolean isSuperAdmin() {
+        return hasRole("SUPERADMIN") || hasRole("ROLE_SUPERADMIN");
     }
 
     /**
