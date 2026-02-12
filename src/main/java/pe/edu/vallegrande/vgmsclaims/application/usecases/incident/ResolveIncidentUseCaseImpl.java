@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para resolver incidentes
+ * Use case implementation for resolving incidents
  */
 @Slf4j
 @Service
@@ -31,7 +31,7 @@ public class ResolveIncidentUseCaseImpl implements IResolveIncidentUseCase {
     
     @Override
     public Mono<Incident> execute(String incidentId, IncidentResolution resolution) {
-        log.info("Resolviendo incidente: {}", incidentId);
+        log.info("Resolving incident: {}", incidentId);
         
         return securityContext.getCurrentUserId()
                 .flatMap(userId -> incidentRepository.findById(incidentId)
@@ -44,17 +44,17 @@ public class ResolveIncidentUseCaseImpl implements IResolveIncidentUseCase {
                             if (!incident.canBeResolved()) {
                                 return Mono.error(new BusinessRuleException(
                                         "INVALID_STATE",
-                                        "El incidente no puede ser resuelto en su estado actual"));
+                                        "The incident cannot be resolved in its current state"));
                             }
                             
                             incident.resolve(userId, resolution.getResolutionNotes());
                             return incidentRepository.save(incident);
                         }))
                 .doOnSuccess(saved -> {
-                    log.info("Incidente resuelto: {}", saved.getIncidentCode());
+                    log.info("Incident resolved: {}", saved.getIncidentCode());
                     publishIncidentResolvedEvent(saved, resolution);
                 })
-                .doOnError(error -> log.error("Error al resolver incidente: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error resolving incident: {}", error.getMessage()));
     }
     
     private void publishIncidentResolvedEvent(Incident incident, IncidentResolution resolution) {
@@ -70,7 +70,7 @@ public class ResolveIncidentUseCaseImpl implements IResolveIncidentUseCase {
                     .build();
             eventPublisher.publishIncidentResolved(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de incidente resuelto: {}", e.getMessage());
+            log.warn("Could not publish incident resolved event: {}", e.getMessage());
         }
     }
 }

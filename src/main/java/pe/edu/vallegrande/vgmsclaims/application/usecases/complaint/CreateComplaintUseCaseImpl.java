@@ -17,7 +17,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Implementación del caso de uso para crear quejas
+ * Use case implementation for creating complaints
  */
 @Slf4j
 @Service
@@ -30,11 +30,11 @@ public class CreateComplaintUseCaseImpl implements ICreateComplaintUseCase {
     
     @Override
     public Mono<Complaint> execute(Complaint complaint) {
-        log.info("Creando nueva queja: {}", complaint.getSubject());
+        log.info("Creando new complaint: {}", complaint.getSubject());
         
         return securityContext.getCurrentUserId()
                 .flatMap(userId -> {
-                    // Establecer valores por defecto
+                    // Set default values
                     complaint.setComplaintCode(generateComplaintCode());
                     complaint.setUserId(userId);
                     complaint.setStatus(ComplaintStatus.RECEIVED);
@@ -44,10 +44,10 @@ public class CreateComplaintUseCaseImpl implements ICreateComplaintUseCase {
                     
                     return complaintRepository.save(complaint)
                             .doOnSuccess(saved -> {
-                                log.info("Queja creada exitosamente: {}", saved.getComplaintCode());
+                                log.info("Complaint created successfully: {}", saved.getComplaintCode());
                                 publishComplaintCreatedEvent(saved);
                             })
-                            .doOnError(error -> log.error("Error al crear queja: {}", error.getMessage()));
+                            .doOnError(error -> log.error("Error creating complaint: {}", error.getMessage()));
                 });
     }
     
@@ -67,7 +67,7 @@ public class CreateComplaintUseCaseImpl implements ICreateComplaintUseCase {
                     .build();
             eventPublisher.publishComplaintCreated(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de queja creada: {}", e.getMessage());
+            log.warn("Could not publish complaint created event: {}", e.getMessage());
         }
     }
 }

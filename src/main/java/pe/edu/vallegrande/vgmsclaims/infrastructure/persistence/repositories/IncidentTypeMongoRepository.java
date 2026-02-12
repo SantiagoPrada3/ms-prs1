@@ -6,7 +6,7 @@ import pe.edu.vallegrande.vgmsclaims.infrastructure.persistence.documents.Incide
 import reactor.core.publisher.Flux;
 
 /**
- * Repositorio MongoDB reactivo para tipos de incidentes
+ * Reactive MongoDB repository for incident types
  */
 @Repository
 public interface IncidentTypeMongoRepository extends ReactiveMongoRepository<IncidentTypeDocument, String> {

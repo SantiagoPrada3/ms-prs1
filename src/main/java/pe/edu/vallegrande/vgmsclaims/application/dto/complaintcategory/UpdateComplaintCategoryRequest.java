@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para actualizar una categoría de queja existente
+ * DTO to update an existing complaint category.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateComplaintCategoryRequest {
-    
+
     private String categoryName;
     private String description;
     private String priorityLevel;

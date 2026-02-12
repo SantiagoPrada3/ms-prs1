@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects;
 
 /**
- * Enum que representa el tipo de respuesta a una queja
+ * Enum representing the type of response to a complaint
  */
 public enum ResponseType {
     INVESTIGACION,

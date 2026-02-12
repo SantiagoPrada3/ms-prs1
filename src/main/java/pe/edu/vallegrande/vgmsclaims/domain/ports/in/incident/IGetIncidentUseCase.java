@@ -5,48 +5,48 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de obtener incidentes
+ * Input port for the get incidents use case
  */
 public interface IGetIncidentUseCase {
     
     /**
-     * Obtiene todos los incidentes
-     * @return lista de incidentes
+     * Gets all incidents
+     * @return list of incidents
      */
     Flux<Incident> findAll();
     
     /**
-     * Obtiene un incidente por su ID
-     * @param id identificador del incidente
-     * @return el incidente encontrado
+     * Gets an incident by its ID
+     * @param id identifier of the incident
+     * @return the found incident
      */
     Mono<Incident> findById(String id);
     
     /**
-     * Obtiene incidentes por organización
-     * @param organizationId identificador de la organización
-     * @return lista de incidentes de la organización
+     * Gets incidents by organization
+     * @param organizationId identifier of the organization
+     * @return list of incidents of the organization
      */
     Flux<Incident> findByOrganizationId(String organizationId);
     
     /**
-     * Obtiene incidentes por zona
-     * @param zoneId identificador de la zona
-     * @return lista de incidentes de la zona
+     * Gets incidents by zone
+     * @param zoneId identifier of the zone
+     * @return list of incidents of the zone
      */
     Flux<Incident> findByZoneId(String zoneId);
     
     /**
-     * Obtiene incidentes por severidad
-     * @param severity severidad del incidente
-     * @return lista de incidentes con esa severidad
+     * Gets incidents by severity
+     * @param severity severity of the incident
+     * @return list of incidents with that severity
      */
     Flux<Incident> findBySeverity(String severity);
     
     /**
-     * Obtiene incidentes por estado
-     * @param status estado del incidente
-     * @return lista de incidentes con ese estado
+     * Gets incidents by status
+     * @param status status of the incident
+     * @return list of incidents with that status
      */
     Flux<Incident> findByStatus(String status);
 }

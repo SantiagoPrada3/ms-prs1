@@ -3,8 +3,8 @@ package pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects;
 import java.math.BigDecimal;
 
 /**
- * Value Object que representa un material usado en una resolución de incidente
- * Inmutable por diseño
+ * Value Object representing a material used in an incident resolution
+ * Immutable by design
  */
 public class MaterialUsed {
     
@@ -37,7 +37,7 @@ public class MaterialUsed {
     }
 
     /**
-     * Calcula el costo total del material usado
+     * Calculates total cost of material used
      */
     public BigDecimal getTotalCost() {
         if (quantity == null || unitCost == null) {

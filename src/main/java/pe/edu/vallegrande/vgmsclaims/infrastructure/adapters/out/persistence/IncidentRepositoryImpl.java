@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del puerto de repositorio de incidentes usando MongoDB
+ * Incident repository port implementation using MongoDB
  */
 @Slf4j
 @Component
@@ -23,84 +23,84 @@ public class IncidentRepositoryImpl implements IIncidentRepository {
 
     @Override
     public Mono<Incident> save(Incident incident) {
-        log.debug("Guardando incidente: {}", incident.getId());
+        log.debug("Saving incident: {}", incident.getId());
         return incidentRepository.save(mapper.toDocument(incident))
                 .map(mapper::toDomain);
     }
 
     @Override
     public Mono<Incident> findById(String id) {
-        log.debug("Buscando incidente por ID: {}", id);
+        log.debug("Finding incident by ID: {}", id);
         return incidentRepository.findById(id)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findAll() {
-        log.debug("Buscando todos los incidentes");
+        log.debug("Finding all the incidents");
         return incidentRepository.findAll()
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByOrganizationId(String organizationId) {
-        log.debug("Buscando incidentes por organización: {}", organizationId);
+        log.debug("Finding incidents by organization: {}", organizationId);
         return incidentRepository.findByOrganizationId(organizationId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByZoneId(String zoneId) {
-        log.debug("Buscando incidentes por zona: {}", zoneId);
+        log.debug("Finding incidents by zone: {}", zoneId);
         return incidentRepository.findByZoneId(zoneId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findBySeverity(String severity) {
-        log.debug("Buscando incidentes por severidad: {}", severity);
+        log.debug("Finding incidents by severity: {}", severity);
         return incidentRepository.findBySeverity(severity)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByStatus(String status) {
-        log.debug("Buscando incidentes por estado: {}", status);
+        log.debug("Finding incidents by status: {}", status);
         return incidentRepository.findByStatus(status)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByIncidentTypeId(String incidentTypeId) {
-        log.debug("Buscando incidentes por tipo: {}", incidentTypeId);
+        log.debug("Finding incidents by type: {}", incidentTypeId);
         return incidentRepository.findByIncidentTypeId(incidentTypeId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByAssignedToUserId(String assignedToUserId) {
-        log.debug("Buscando incidentes asignados a: {}", assignedToUserId);
+        log.debug("Searching incidents assigned to: {}", assignedToUserId);
         return incidentRepository.findByAssignedToUserId(assignedToUserId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByResolved(Boolean resolved) {
-        log.debug("Buscando incidentes por estado de resolución: {}", resolved);
+        log.debug("Finding incidents by resolution status: {}", resolved);
         return incidentRepository.findByResolved(resolved)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Incident> findByRecordStatus(String recordStatus) {
-        log.debug("Buscando incidentes por estado de registro: {}", recordStatus);
+        log.debug("Finding incidents by record status: {}", recordStatus);
         return incidentRepository.findByRecordStatus(recordStatus)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Mono<Void> deleteById(String id) {
-        log.debug("Eliminando incidente: {}", id);
+        log.debug("Deleting incident: {}", id);
         return incidentRepository.deleteById(id);
     }
 

@@ -7,7 +7,7 @@ import pe.edu.vallegrande.vgmsclaims.domain.ports.out.ISecurityContext;
 import reactor.core.publisher.Mono;
 
 /**
- * Adaptador que implementa el puerto de seguridad usando el contexto del gateway
+ * Adapter implementing the security port using gateway context.
  */
 @Slf4j
 @Component
@@ -17,19 +17,19 @@ public class SecurityContextAdapter implements ISecurityContext {
     @Override
     public Mono<AuthenticatedUser> getCurrentUser() {
         return GatewayHeadersFilter.getCurrentUser()
-                .doOnNext(user -> log.debug("Usuario actual: {}", user.getUserId()));
+                .doOnNext(user -> log.debug("Current user: {}", user.getUserId()));
     }
 
     @Override
     public Mono<String> getCurrentUserId() {
         return GatewayHeadersFilter.getCurrentUserId()
-                .doOnNext(userId -> log.debug("ID de usuario actual: {}", userId));
+                .doOnNext(userId -> log.debug("Current user ID: {}", userId));
     }
 
     @Override
     public Mono<String> getCurrentOrganizationId() {
         return GatewayHeadersFilter.getCurrentOrganizationId()
-                .doOnNext(orgId -> log.debug("Organización actual: {}", orgId));
+                .doOnNext(orgId -> log.debug("Current organization: {}", orgId));
     }
 
     @Override

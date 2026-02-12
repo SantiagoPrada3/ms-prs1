@@ -4,14 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Incident;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de restaurar incidente
+ * Input port for the restore incident use case
  */
 public interface IRestoreIncidentUseCase {
-    
+
     /**
-     * Restaura un incidente eliminado
-     * @param id identificador del incidente
-     * @return el incidente restaurado
+     * Restores a deleted incident
+     * 
+     * @param id identifier of the incident
+     * @return the restored incident
      */
     Mono<Incident> execute(String id);
 }

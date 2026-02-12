@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.exceptions.base;
 
 /**
- * Excepción para conflictos de recursos
+ * Exception for resource conflicts
  */
 public class ConflictException extends DomainException {
     
@@ -10,6 +10,6 @@ public class ConflictException extends DomainException {
     }
     
     public ConflictException(String resourceType, String identifier) {
-        super("CONFLICT", String.format("%s con identificador '%s' ya existe o está en conflicto", resourceType, identifier));
+        super("CONFLICT", String.format("%s with identifier '%s' already exists or is in conflict", resourceType, identifier));
     }
 }

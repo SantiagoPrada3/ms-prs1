@@ -5,48 +5,48 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de salida para el repositorio de respuestas de queja
+ * Output port for the complaint response repository
  */
 public interface IComplaintResponseRepository {
     
     /**
-     * Guarda una respuesta de queja
-     * @param response respuesta a guardar
-     * @return la respuesta guardada
+     * Saves a complaint response
+     * @param response response to save
+     * @return la response saved
      */
     Mono<ComplaintResponse> save(ComplaintResponse response);
     
     /**
-     * Busca una respuesta por su ID
-     * @param id identificador de la respuesta
-     * @return la respuesta encontrada
+     * Finds a response by its ID
+     * @param id identifier of the response
+     * @return la response found
      */
     Mono<ComplaintResponse> findById(String id);
     
     /**
-     * Obtiene todas las respuestas de una queja
-     * @param complaintId identificador de la queja
-     * @return lista de respuestas
+     * Gets all responses of a complaint
+     * @param complaintId identifier of the complaint
+     * @return list of responses
      */
     Flux<ComplaintResponse> findByComplaintId(String complaintId);
     
     /**
-     * Obtiene respuestas por usuario
-     * @param userId identificador del usuario que respondió
-     * @return lista de respuestas
+     * Gets responses by user
+     * @param userId identifier of the user who responded
+     * @return list of responses
      */
     Flux<ComplaintResponse> findByUserId(String userId);
     
     /**
-     * Cuenta las respuestas de una queja
-     * @param complaintId identificador de la queja
-     * @return número de respuestas
+     * Counts the responses of a complaint
+     * @param complaintId identifier of the complaint
+     * @return number of responses
      */
     Mono<Long> countByComplaintId(String complaintId);
     
     /**
-     * Elimina todas las respuestas de una queja
-     * @param complaintId identificador de la queja
+     * Deletes all responses of a complaint
+     * @param complaintId identifier of the complaint
      * @return void
      */
     Mono<Void> deleteByComplaintId(String complaintId);

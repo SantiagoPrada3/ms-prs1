@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del puerto de repositorio de tipos de incidente usando MongoDB
+ * Incident type repository port implementation using MongoDB
  */
 @Slf4j
 @Component
@@ -23,7 +23,7 @@ public class IncidentTypeRepositoryImpl implements IIncidentTypeRepository {
 
     @Override
     public Mono<IncidentType> save(IncidentType incidentType) {
-        log.debug("Guardando tipo de incidente: {}", incidentType.getId());
+        log.debug("Saving incident type: {}", incidentType.getId());
         IncidentTypeDocument document = toDocument(incidentType);
         document.prePersist();
         return typeRepository.save(document)
@@ -32,28 +32,28 @@ public class IncidentTypeRepositoryImpl implements IIncidentTypeRepository {
 
     @Override
     public Mono<IncidentType> findById(String id) {
-        log.debug("Buscando tipo de incidente por ID: {}", id);
+        log.debug("Finding incident type by ID: {}", id);
         return typeRepository.findById(id)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<IncidentType> findAll() {
-        log.debug("Buscando todos los tipos de incidente");
+        log.debug("Finding all the incident types");
         return typeRepository.findAll()
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<IncidentType> findByOrganizationId(String organizationId) {
-        log.debug("Buscando tipos de incidente por organización: {}", organizationId);
+        log.debug("Finding incident types by organization: {}", organizationId);
         return typeRepository.findByOrganizationId(organizationId)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<IncidentType> findActiveByOrganizationId(String organizationId) {
-        log.debug("Buscando tipos de incidente activos por organización: {}", organizationId);
+        log.debug("Finding incident types active by organization: {}", organizationId);
         return typeRepository.findByOrganizationId(organizationId)
                 .filter(doc -> RecordStatus.ACTIVE.name().equals(doc.getRecordStatus()))
                 .map(this::toDomain);
@@ -61,7 +61,7 @@ public class IncidentTypeRepositoryImpl implements IIncidentTypeRepository {
 
     @Override
     public Mono<IncidentType> findByTypeCodeAndOrganizationId(String typeCode, String organizationId) {
-        log.debug("Buscando tipo de incidente por código {} y organización {}", typeCode, organizationId);
+        log.debug("Finding incident type by code {} and organization {}", typeCode, organizationId);
         return typeRepository.findByOrganizationId(organizationId)
                 .filter(doc -> typeCode.equals(doc.getTypeCode()))
                 .next()
@@ -70,13 +70,13 @@ public class IncidentTypeRepositoryImpl implements IIncidentTypeRepository {
 
     @Override
     public Mono<Boolean> existsByTypeCodeAndOrganizationId(String typeCode, String organizationId) {
-        log.debug("Verificando existencia de tipo con código {} en organización {}", typeCode, organizationId);
+        log.debug("Checking existencia de type with code {} en organization {}", typeCode, organizationId);
         return typeRepository.findByOrganizationId(organizationId)
                 .filter(doc -> typeCode.equals(doc.getTypeCode()))
                 .hasElements();
     }
 
-    // ========== Métodos de mapeo ==========
+    // ========== Mapping methods ==========
 
     private IncidentType toDomain(IncidentTypeDocument document) {
         return IncidentType.builder()

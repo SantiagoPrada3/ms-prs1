@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso de eliminar (soft delete) categoría de queja
+ * Use case implementation for soft deleting complaint categories
  */
 @Slf4j
 @Service

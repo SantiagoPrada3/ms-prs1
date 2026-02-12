@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso de crear tipo de incidente
+ * Use case implementation for creating incident types
  */
 @Slf4j
 @Service

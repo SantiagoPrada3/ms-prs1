@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.Instant;
 
 /**
- * Documento MongoDB para tipos de incidentes
+ * MongoDB document for incident types
  */
 @Data
 @Builder

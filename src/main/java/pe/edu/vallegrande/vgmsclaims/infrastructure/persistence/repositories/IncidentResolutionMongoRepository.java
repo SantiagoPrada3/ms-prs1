@@ -6,7 +6,7 @@ import pe.edu.vallegrande.vgmsclaims.infrastructure.persistence.documents.Incide
 import reactor.core.publisher.Mono;
 
 /**
- * Repositorio MongoDB reactivo para resoluciones de incidentes
+ * Reactive MongoDB repository for incident resolutions
  */
 @Repository
 public interface IncidentResolutionMongoRepository extends ReactiveMongoRepository<IncidentResolutionDocument, String> {

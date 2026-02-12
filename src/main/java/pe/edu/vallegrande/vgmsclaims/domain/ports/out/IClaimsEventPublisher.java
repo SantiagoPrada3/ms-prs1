@@ -1,67 +1,67 @@
 package pe.edu.vallegrande.vgmsclaims.domain.ports.out;
 
 /**
- * Puerto de salida para el publicador de eventos de claims
+ * Output port for the claims event publisher
  */
 public interface IClaimsEventPublisher {
     
     /**
-     * Publica un evento de queja creada
-     * @param event evento a publicar
+     * Publishes a complaint created event
+     * @param event event to publish
      */
     void publishComplaintCreated(Object event);
     
     /**
-     * Publica un evento de queja actualizada
-     * @param event evento a publicar
+     * Publishes a complaint updated event
+     * @param event event to publish
      */
     void publishComplaintUpdated(Object event);
     
     /**
-     * Publica un evento de respuesta agregada a queja
-     * @param event evento a publicar
+     * Publishes a response added to complaint event
+     * @param event event to publish
      */
     void publishComplaintResponseAdded(Object event);
     
     /**
-     * Publica un evento de queja cerrada
-     * @param event evento a publicar
+     * Publishes a complaint closed event
+     * @param event event to publish
      */
     void publishComplaintClosed(Object event);
     
     /**
-     * Publica un evento de incidente creado
-     * @param event evento a publicar
+     * Publishes an incident created event
+     * @param event event to publish
      */
     void publishIncidentCreated(Object event);
     
     /**
-     * Publica un evento de incidente asignado
-     * @param event evento a publicar
+     * Publishes an incident assigned event
+     * @param event event to publish
      */
     void publishIncidentAssigned(Object event);
     
     /**
-     * Publica un evento de incidente actualizado
-     * @param event evento a publicar
+     * Publishes an incident updated event
+     * @param event event to publish
      */
     void publishIncidentUpdated(Object event);
     
     /**
-     * Publica un evento de incidente resuelto
-     * @param event evento a publicar
+     * Publishes an incident resolved event
+     * @param event event to publish
      */
     void publishIncidentResolved(Object event);
     
     /**
-     * Publica un evento de incidente cerrado
-     * @param event evento a publicar
+     * Publishes an incident closed event
+     * @param event event to publish
      */
     void publishIncidentClosed(Object event);
     
     /**
-     * Publica una alerta de incidente urgente
-     * @param event evento a publicar
+     * Publishes an urgent incident alert
+     * @param event event to publish
      */
     void publishUrgentIncidentAlert(Object event);
 }

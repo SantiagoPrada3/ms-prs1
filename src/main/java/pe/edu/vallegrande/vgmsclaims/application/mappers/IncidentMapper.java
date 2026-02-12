@@ -10,13 +10,13 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.RecordStatus;
 import pe.edu.vallegrande.vgmsclaims.infrastructure.persistence.documents.IncidentDocument;
 
 /**
- * Mapper para conversiones de Incident
+ * Mapper for Incident conversions
  */
 @Component
 public class IncidentMapper {
     
     /**
-     * Convierte un request de creación a modelo de dominio
+     * Converts a creation request to domain model
      */
     public Incident toDomain(CreateIncidentRequest request) {
         return Incident.builder()
@@ -41,7 +41,7 @@ public class IncidentMapper {
     }
     
     /**
-     * Convierte un documento a modelo de dominio
+     * Converts a document to domain model
      */
     public Incident toDomain(IncidentDocument document) {
         return Incident.builder()
@@ -69,7 +69,7 @@ public class IncidentMapper {
     }
     
     /**
-     * Convierte un modelo de dominio a documento
+     * Converts a domain model to document
      */
     public IncidentDocument toDocument(Incident domain) {
         IncidentDocument document = new IncidentDocument();
@@ -97,7 +97,7 @@ public class IncidentMapper {
     }
     
     /**
-     * Convierte un modelo de dominio a DTO de respuesta
+     * Converts a domain model to response DTO
      */
     public IncidentResponse toResponse(Incident domain) {
         return IncidentResponse.builder()

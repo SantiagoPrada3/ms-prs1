@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * DTO para resolver un incidente
+ * DTO to resolve an incident
  */
 @Data
 @Builder
@@ -19,10 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 public class ResolveIncidentRequest {
     
-    @NotNull(message = "El tipo de resolución es requerido")
+    @NotNull(message = "Resolution type is required")
     private String resolutionType;
     
-    @NotBlank(message = "Las acciones tomadas son requeridas")
+    @NotBlank(message = "Actions taken are required")
     private String actionsTaken;
     
     private List<MaterialUsedRequest> materialsUsed;

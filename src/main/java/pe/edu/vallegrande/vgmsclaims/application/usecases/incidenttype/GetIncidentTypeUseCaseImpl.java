@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del caso de uso de obtener tipos de incidente
+ * Use case implementation for getting incident types
  */
 @Slf4j
 @Service

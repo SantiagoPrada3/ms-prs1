@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * DTO de respuesta para tipos de incidente
+ * Response DTO for incident types.
  */
 @Data
 @Builder
@@ -17,7 +17,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class IncidentTypeResponse {
-    
+
     private String id;
     private String organizationId;
     private String typeCode;

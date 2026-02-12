@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para asignar un incidente a un técnico
+ * DTO to assign an incident to a technician
  */
 @Data
 @Builder
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AssignIncidentRequest {
     
-    @NotBlank(message = "El ID del usuario es requerido")
+    @NotBlank(message = "User ID is required")
     private String userId;
     
     private String notes;

@@ -9,8 +9,8 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.RecordStatus;
 import java.time.Instant;
 
 /**
- * Entidad de dominio que representa una Categoría de Queja.
- * No contiene anotaciones de infraestructura.
+ * Domain entity representing a Complaint Category.
+ * Does not contain infrastructure annotations.
  */
 @Data
 @Builder
@@ -33,7 +33,7 @@ public class ComplaintCategory {
     private Instant updatedAt;
 
     /**
-     * Verifica si la categoría está activa
+     * Checks if category is active
      */
     public boolean isActive() {
         return recordStatus == RecordStatus.ACTIVE;

@@ -4,14 +4,14 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.IncidentType;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de crear tipo de incidente
+ * Input port for the create incident type use case
  */
 public interface ICreateIncidentTypeUseCase {
     
     /**
-     * Crea un nuevo tipo de incidente
-     * @param incidentType datos del tipo de incidente a crear
-     * @return el tipo de incidente creado
+     * Creates a new incident type
+     * @param incidentType data of the incident type to create
+     * @return the created incident type
      */
     Mono<IncidentType> execute(IncidentType incidentType);
 }

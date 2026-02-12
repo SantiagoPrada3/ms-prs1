@@ -9,8 +9,8 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.RecordStatus;
 import java.time.Instant;
 
 /**
- * Entidad de dominio que representa un Tipo de Incidente.
- * No contiene anotaciones de infraestructura.
+ * Domain entity representing an Incident Type.
+ * Does not contain infrastructure annotations.
  */
 @Data
 @Builder
@@ -34,7 +34,7 @@ public class IncidentType {
     private Instant updatedAt;
 
     /**
-     * Verifica si el tipo está activo
+     * Checks if type is active
      */
     public boolean isActive() {
         return recordStatus == RecordStatus.ACTIVE;

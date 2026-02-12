@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso de restaurar tipo de incidente
+ * Use case implementation for restoring incident types
  */
 @Slf4j
 @Service

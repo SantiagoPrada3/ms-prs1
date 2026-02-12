@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para eliminar (soft delete) incidentes
+ * Use case implementation for soft deleting incidents
  */
 @Slf4j
 @Service
@@ -24,7 +24,7 @@ public class DeleteIncidentUseCaseImpl implements IDeleteIncidentUseCase {
     
     @Override
     public Mono<Incident> execute(String id) {
-        log.info("Eliminando incidente con ID: {}", id);
+        log.info("Deleting incident with ID: {}", id);
         
         return incidentRepository.findById(id)
                 .switchIfEmpty(Mono.error(new IncidentNotFoundException(id)))
@@ -33,7 +33,7 @@ public class DeleteIncidentUseCaseImpl implements IDeleteIncidentUseCase {
                     incident.setUpdatedAt(Instant.now());
                     return incidentRepository.save(incident);
                 })
-                .doOnSuccess(deleted -> log.info("Incidente eliminado (soft delete): {}", deleted.getIncidentCode()))
-                .doOnError(error -> log.error("Error al eliminar incidente: {}", error.getMessage()));
+                .doOnSuccess(deleted -> log.info("Incident deleted (soft delete): {}", deleted.getIncidentCode()))
+                .doOnError(error -> log.error("Error deleting incident: {}", error.getMessage()));
     }
 }

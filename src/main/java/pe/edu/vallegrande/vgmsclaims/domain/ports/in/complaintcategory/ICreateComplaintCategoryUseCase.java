@@ -4,14 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.ComplaintCategory;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de crear categoría de queja
+ * Input port for the create complaint category use case
  */
 public interface ICreateComplaintCategoryUseCase {
-    
+
     /**
-     * Crea una nueva categoría de queja
-     * @param category datos de la categoría a crear
-     * @return la categoría creada
+     * Creates a new complaint category
+     * 
+     * @param category category data to create
+     * @return the created category
      */
     Mono<ComplaintCategory> execute(ComplaintCategory category);
 }

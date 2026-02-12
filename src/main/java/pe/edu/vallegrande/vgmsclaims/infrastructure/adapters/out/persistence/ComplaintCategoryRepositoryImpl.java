@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del puerto de repositorio de categorías de queja usando MongoDB
+ * Complaint category repository port implementation using MongoDB
  */
 @Slf4j
 @Component
@@ -23,7 +23,7 @@ public class ComplaintCategoryRepositoryImpl implements IComplaintCategoryReposi
 
     @Override
     public Mono<ComplaintCategory> save(ComplaintCategory category) {
-        log.debug("Guardando categoría de queja: {}", category.getId());
+        log.debug("Saving category de complaint: {}", category.getId());
         ComplaintCategoryDocument document = toDocument(category);
         document.prePersist();
         return categoryRepository.save(document)
@@ -32,28 +32,28 @@ public class ComplaintCategoryRepositoryImpl implements IComplaintCategoryReposi
 
     @Override
     public Mono<ComplaintCategory> findById(String id) {
-        log.debug("Buscando categoría por ID: {}", id);
+        log.debug("Finding category by ID: {}", id);
         return categoryRepository.findById(id)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<ComplaintCategory> findAll() {
-        log.debug("Buscando todas las categorías");
+        log.debug("Finding all the categorys");
         return categoryRepository.findAll()
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<ComplaintCategory> findByOrganizationId(String organizationId) {
-        log.debug("Buscando categorías por organización: {}", organizationId);
+        log.debug("Finding categorys by organization: {}", organizationId);
         return categoryRepository.findByOrganizationId(organizationId)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<ComplaintCategory> findActiveByOrganizationId(String organizationId) {
-        log.debug("Buscando categorías activas por organización: {}", organizationId);
+        log.debug("Finding categorys active by organization: {}", organizationId);
         return categoryRepository.findByOrganizationId(organizationId)
                 .filter(doc -> RecordStatus.ACTIVE.name().equals(doc.getRecordStatus()))
                 .map(this::toDomain);
@@ -61,7 +61,7 @@ public class ComplaintCategoryRepositoryImpl implements IComplaintCategoryReposi
 
     @Override
     public Mono<ComplaintCategory> findByCategoryCodeAndOrganizationId(String categoryCode, String organizationId) {
-        log.debug("Buscando categoría por código {} y organización {}", categoryCode, organizationId);
+        log.debug("Finding category by code {} and organization {}", categoryCode, organizationId);
         return categoryRepository.findByOrganizationId(organizationId)
                 .filter(doc -> categoryCode.equals(doc.getCategoryCode()))
                 .next()
@@ -70,13 +70,13 @@ public class ComplaintCategoryRepositoryImpl implements IComplaintCategoryReposi
 
     @Override
     public Mono<Boolean> existsByCategoryCodeAndOrganizationId(String categoryCode, String organizationId) {
-        log.debug("Verificando existencia de categoría con código {} en organización {}", categoryCode, organizationId);
+        log.debug("Checking existencia de category with code {} en organization {}", categoryCode, organizationId);
         return categoryRepository.findByOrganizationId(organizationId)
                 .filter(doc -> categoryCode.equals(doc.getCategoryCode()))
                 .hasElements();
     }
 
-    // ========== Métodos de mapeo ==========
+    // ========== Mapping methods ==========
 
     private ComplaintCategory toDomain(ComplaintCategoryDocument document) {
         return ComplaintCategory.builder()

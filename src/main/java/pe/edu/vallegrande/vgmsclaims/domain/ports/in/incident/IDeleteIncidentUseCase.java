@@ -4,14 +4,14 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Incident;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de eliminar (soft delete) incidente
+ * Input port for the soft delete incident use case
  */
 public interface IDeleteIncidentUseCase {
     
     /**
-     * Elimina lógicamente un incidente (soft delete)
-     * @param id identificador del incidente
-     * @return el incidente eliminado
+     * Logically deletes an incident (soft delete)
+     * @param id identifier of the incident
+     * @return the deleted incident
      */
     Mono<Incident> execute(String id);
 }

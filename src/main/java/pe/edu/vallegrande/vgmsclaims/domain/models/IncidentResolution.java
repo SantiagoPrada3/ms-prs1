@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Entidad de dominio que representa una Resolución de Incidente.
- * No contiene anotaciones de infraestructura.
+ * Domain entity representing an Incident Resolution.
+ * Does not contain infrastructure annotations.
  */
 @Data
 @Builder
@@ -41,7 +41,7 @@ public class IncidentResolution {
     private Instant updatedAt;
 
     /**
-     * Calcula el costo total de los materiales usados
+     * Calculates total cost of materials used
      */
     public BigDecimal calculateMaterialsCost() {
         if (materialsUsed == null || materialsUsed.isEmpty()) {
@@ -53,7 +53,7 @@ public class IncidentResolution {
     }
 
     /**
-     * Agrega un material usado a la resolución
+     * Adds a used material to the resolution
      */
     public void addMaterial(MaterialUsed material) {
         if (materialsUsed == null) {

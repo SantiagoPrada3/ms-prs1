@@ -7,27 +7,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para crear un nuevo tipo de incidente
+ * DTO to create a new incident type.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateIncidentTypeRequest {
-    
-    @NotBlank(message = "El código de tipo es requerido")
+
+    @NotBlank(message = "Type code is required")
     private String typeCode;
-    
-    @NotBlank(message = "El nombre de tipo es requerido")
+
+    @NotBlank(message = "Type name is required")
     private String typeName;
-    
+
     private String description;
-    
+
     private String priorityLevel;
-    
+
     private Integer estimatedResolutionTime;
-    
+
     private Boolean requiresExternalService;
-    
+
     private String organizationId;
 }

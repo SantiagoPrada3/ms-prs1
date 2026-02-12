@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para cerrar quejas
+ * Use case implementation for closing complaints
  */
 @Slf4j
 @Service
@@ -28,7 +28,7 @@ public class CloseComplaintUseCaseImpl implements ICloseComplaintUseCase {
     
     @Override
     public Mono<Complaint> execute(String id, Integer satisfactionRating) {
-        log.info("Cerrando queja con ID: {}", id);
+        log.info("Closing complaint with ID: {}", id);
         
         return complaintRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ComplaintNotFoundException(id)))
@@ -41,10 +41,10 @@ public class CloseComplaintUseCaseImpl implements ICloseComplaintUseCase {
                     return complaintRepository.save(complaint);
                 })
                 .doOnSuccess(saved -> {
-                    log.info("Queja cerrada: {}", saved.getComplaintCode());
+                    log.info("Complaint closed: {}", saved.getComplaintCode());
                     publishComplaintClosedEvent(saved);
                 })
-                .doOnError(error -> log.error("Error al cerrar queja: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error closing complaint: {}", error.getMessage()));
     }
     
     private void publishComplaintClosedEvent(Complaint complaint) {
@@ -57,7 +57,7 @@ public class CloseComplaintUseCaseImpl implements ICloseComplaintUseCase {
                     .build();
             eventPublisher.publishComplaintClosed(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de queja cerrada: {}", e.getMessage());
+            log.warn("Could not publish complaint closed event: {}", e.getMessage());
         }
     }
 }

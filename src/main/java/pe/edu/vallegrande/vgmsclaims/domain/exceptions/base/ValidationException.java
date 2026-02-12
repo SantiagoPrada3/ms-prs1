@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Excepción para errores de validación
+ * Exception for validation errors
  */
 public class ValidationException extends DomainException {
     

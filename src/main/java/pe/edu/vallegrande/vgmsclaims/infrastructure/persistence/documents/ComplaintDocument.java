@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.Instant;
 
 /**
- * Documento MongoDB para quejas
+ * MongoDB document for complaints
  */
 @Data
 @Builder

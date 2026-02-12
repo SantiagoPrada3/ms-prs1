@@ -11,51 +11,51 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del caso de uso para obtener incidentes
+ * Use case implementation for getting incidents
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class GetIncidentUseCaseImpl implements IGetIncidentUseCase {
-    
+
     private final IIncidentRepository incidentRepository;
-    
+
     @Override
     public Flux<Incident> findAll() {
-        log.info("Obteniendo todos los incidentes");
+        log.info("Getting all incidents");
         return incidentRepository.findAll()
-                .doOnComplete(() -> log.info("Consulta de incidentes completada"));
+                .doOnComplete(() -> log.info("Consulta de incidents completada"));
     }
-    
+
     @Override
     public Mono<Incident> findById(String id) {
-        log.info("Buscando incidente con ID: {}", id);
+        log.info("Finding incident with ID: {}", id);
         return incidentRepository.findById(id)
                 .switchIfEmpty(Mono.error(new IncidentNotFoundException(id)))
-                .doOnSuccess(incident -> log.info("Incidente encontrado: {}", incident.getIncidentCode()));
+                .doOnSuccess(incident -> log.info("Incident found: {}", incident.getIncidentCode()));
     }
-    
+
     @Override
     public Flux<Incident> findByOrganizationId(String organizationId) {
-        log.info("Buscando incidentes de organización: {}", organizationId);
+        log.info("Finding incidents de organization: {}", organizationId);
         return incidentRepository.findByOrganizationId(organizationId);
     }
-    
+
     @Override
     public Flux<Incident> findByZoneId(String zoneId) {
-        log.info("Buscando incidentes de zona: {}", zoneId);
+        log.info("Finding incidents de zone: {}", zoneId);
         return incidentRepository.findByZoneId(zoneId);
     }
-    
+
     @Override
     public Flux<Incident> findBySeverity(String severity) {
-        log.info("Buscando incidentes con severidad: {}", severity);
+        log.info("Finding incidents with severidad: {}", severity);
         return incidentRepository.findBySeverity(severity);
     }
-    
+
     @Override
     public Flux<Incident> findByStatus(String status) {
-        log.info("Buscando incidentes con estado: {}", status);
+        log.info("Finding incidents with estado: {}", status);
         return incidentRepository.findByStatus(status);
     }
 }

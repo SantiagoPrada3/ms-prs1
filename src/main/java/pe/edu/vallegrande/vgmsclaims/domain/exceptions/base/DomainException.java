@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.exceptions.base;
 
 /**
- * Clase base abstracta para excepciones de dominio
+ * Abstract base class for domain exceptions
  */
 public abstract class DomainException extends RuntimeException {
     

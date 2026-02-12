@@ -5,41 +5,41 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de obtener quejas
+ * Input port for the get complaints use case
  */
 public interface IGetComplaintUseCase {
     
     /**
-     * Obtiene todas las quejas
-     * @return lista de quejas
+     * Gets all complaints
+     * @return list of complaints
      */
     Flux<Complaint> findAll();
     
     /**
-     * Obtiene una queja por su ID
-     * @param id identificador de la queja
-     * @return la queja encontrada
+     * Gets a complaint by its ID
+     * @param id identifier of the complaint
+     * @return the found complaint
      */
     Mono<Complaint> findById(String id);
     
     /**
-     * Obtiene quejas por organización
-     * @param organizationId identificador de la organización
-     * @return lista de quejas de la organización
+     * Gets complaints by organization
+     * @param organizationId identifier of the organization
+     * @return list of complaints of the organization
      */
     Flux<Complaint> findByOrganizationId(String organizationId);
     
     /**
-     * Obtiene quejas por usuario
-     * @param userId identificador del usuario
-     * @return lista de quejas del usuario
+     * Gets complaints by user
+     * @param userId identifier of the user
+     * @return list of complaints of the user
      */
     Flux<Complaint> findByUserId(String userId);
     
     /**
-     * Obtiene quejas por estado
-     * @param status estado de la queja
-     * @return lista de quejas con ese estado
+     * Gets complaints by status
+     * @param status status of the complaint
+     * @return list of complaints with that status
      */
     Flux<Complaint> findByStatus(String status);
 }

@@ -11,8 +11,8 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.RecordStatus;
 import java.time.Instant;
 
 /**
- * Entidad de dominio que representa una Queja/Reclamo.
- * No contiene anotaciones de infraestructura (MongoDB, JPA, etc.)
+ * Domain entity representing a Complaint.
+ * Does not contain infrastructure annotations (MongoDB, JPA, etc.)
  */
 @Data
 @Builder
@@ -43,14 +43,14 @@ public class Complaint {
     private Instant updatedAt;
 
     /**
-     * Verifica si la queja puede ser asignada
+     * Checks if complaint can be assigned
      */
     public boolean canBeAssigned() {
         return status == ComplaintStatus.RECEIVED && recordStatus == RecordStatus.ACTIVE;
     }
 
     /**
-     * Verifica si la queja puede ser resuelta
+     * Checks if complaint can be resolved
      */
     public boolean canBeResolved() {
         return (status == ComplaintStatus.IN_PROGRESS || status == ComplaintStatus.RECEIVED) 
@@ -58,25 +58,25 @@ public class Complaint {
     }
 
     /**
-     * Verifica si la queja puede ser cerrada
+     * Checks if complaint can be closed
      */
     public boolean canBeClosed() {
         return status == ComplaintStatus.RESOLVED && recordStatus == RecordStatus.ACTIVE;
     }
 
     /**
-     * Verifica si la queja está activa
+     * Checks if complaint is active
      */
     public boolean isActive() {
         return recordStatus == RecordStatus.ACTIVE;
     }
 
     /**
-     * Asigna un usuario a la queja
+     * Assigns a user to the complaint
      */
     public void assignTo(String userId) {
         if (!canBeAssigned()) {
-            throw new IllegalStateException("La queja no puede ser asignada en su estado actual");
+            throw new IllegalStateException("The complaint cannot be assigned in its current state");
         }
         this.assignedToUserId = userId;
         this.status = ComplaintStatus.IN_PROGRESS;
@@ -84,11 +84,11 @@ public class Complaint {
     }
 
     /**
-     * Resuelve la queja
+     * Resolves the complaint
      */
     public void resolve() {
         if (!canBeResolved()) {
-            throw new IllegalStateException("La queja no puede ser resuelta en su estado actual");
+            throw new IllegalStateException("The complaint cannot be resolved in its current state");
         }
         this.status = ComplaintStatus.RESOLVED;
         this.actualResolutionDate = Instant.now();
@@ -96,11 +96,11 @@ public class Complaint {
     }
 
     /**
-     * Cierra la queja
+     * Closes the complaint
      */
     public void close(Integer satisfactionRating) {
         if (!canBeClosed()) {
-            throw new IllegalStateException("La queja no puede ser cerrada en su estado actual");
+            throw new IllegalStateException("The complaint cannot be closed in its current state");
         }
         this.status = ComplaintStatus.CLOSED;
         this.satisfactionRating = satisfactionRating;

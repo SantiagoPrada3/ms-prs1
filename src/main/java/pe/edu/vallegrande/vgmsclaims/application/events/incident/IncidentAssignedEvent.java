@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * Evento emitido cuando se asigna un incidente
+ * Event emitted when an incident is assigned
  */
 @Data
 @Builder

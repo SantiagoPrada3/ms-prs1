@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.exceptions.base;
 
 /**
- * Excepción para recursos no encontrados
+ * Exception for resources not found
  */
 public class NotFoundException extends DomainException {
     
@@ -10,6 +10,6 @@ public class NotFoundException extends DomainException {
     }
     
     public NotFoundException(String resourceType, String id) {
-        super("NOT_FOUND", String.format("%s con id '%s' no encontrado", resourceType, id));
+        super("NOT_FOUND", String.format("%s with id '%s' not found", resourceType, id));
     }
 }

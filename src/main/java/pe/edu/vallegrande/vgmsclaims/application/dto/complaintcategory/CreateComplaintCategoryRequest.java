@@ -7,25 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para crear una nueva categoría de queja
+ * DTO to create a new complaint category.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateComplaintCategoryRequest {
-    
-    @NotBlank(message = "El código de categoría es requerido")
+
+    @NotBlank(message = "Category code is required")
     private String categoryCode;
-    
-    @NotBlank(message = "El nombre de categoría es requerido")
+
+    @NotBlank(message = "Category name is required")
     private String categoryName;
-    
+
     private String description;
-    
+
     private String priorityLevel;
-    
+
     private Integer maxResponseTime;
-    
+
     private String organizationId;
 }

@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects;
 
 /**
- * Enum que representa la severidad de un incidente
+ * Enum representing the severity of an incident
  */
 public enum IncidentSeverity {
     LOW,

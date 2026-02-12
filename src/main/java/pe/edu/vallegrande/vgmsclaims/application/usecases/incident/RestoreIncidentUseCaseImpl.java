@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para restaurar incidentes eliminados
+ * Use case implementation for restoring deleted incidents
  */
 @Slf4j
 @Service
@@ -24,7 +24,7 @@ public class RestoreIncidentUseCaseImpl implements IRestoreIncidentUseCase {
     
     @Override
     public Mono<Incident> execute(String id) {
-        log.info("Restaurando incidente con ID: {}", id);
+        log.info("Restoring incident with ID: {}", id);
         
         return incidentRepository.findById(id)
                 .switchIfEmpty(Mono.error(new IncidentNotFoundException(id)))
@@ -33,7 +33,7 @@ public class RestoreIncidentUseCaseImpl implements IRestoreIncidentUseCase {
                     incident.setUpdatedAt(Instant.now());
                     return incidentRepository.save(incident);
                 })
-                .doOnSuccess(restored -> log.info("Incidente restaurado: {}", restored.getIncidentCode()))
-                .doOnError(error -> log.error("Error al restaurar incidente: {}", error.getMessage()));
+                .doOnSuccess(restored -> log.info("Incident restored: {}", restored.getIncidentCode()))
+                .doOnError(error -> log.error("Error restoring incident: {}", error.getMessage()));
     }
 }

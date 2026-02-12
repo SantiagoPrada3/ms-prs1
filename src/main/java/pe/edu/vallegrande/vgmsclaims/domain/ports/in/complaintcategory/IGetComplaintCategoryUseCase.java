@@ -5,34 +5,34 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de obtener categorías de queja
+ * Input port for the get complaint categories use case
  */
 public interface IGetComplaintCategoryUseCase {
     
     /**
-     * Obtiene todas las categorías de queja
-     * @return lista de categorías
+     * Gets all categories de complaint
+     * @return list of categorys
      */
     Flux<ComplaintCategory> findAll();
     
     /**
-     * Obtiene una categoría por su ID
-     * @param id identificador de la categoría
-     * @return la categoría encontrada
+     * Gets a category by its ID
+     * @param id identifier of the category
+     * @return the found category
      */
     Mono<ComplaintCategory> findById(String id);
     
     /**
-     * Obtiene categorías por organización
-     * @param organizationId identificador de la organización
-     * @return lista de categorías de la organización
+     * Gets categories by organization
+     * @param organizationId identifier of the organization
+     * @return list of categorys of the organization
      */
     Flux<ComplaintCategory> findByOrganizationId(String organizationId);
     
     /**
-     * Obtiene categorías activas por organización
-     * @param organizationId identificador de la organización
-     * @return lista de categorías activas
+     * Gets active categories by organization
+     * @param organizationId identifier of the organization
+     * @return list of categorys activas
      */
     Flux<ComplaintCategory> findActiveByOrganizationId(String organizationId);
 }

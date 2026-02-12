@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso de crear categoría de queja
+ * Use case implementation for creating complaint categories
  */
 @Slf4j
 @Service

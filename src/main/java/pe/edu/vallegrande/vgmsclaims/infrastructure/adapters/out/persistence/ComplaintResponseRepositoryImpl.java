@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del puerto de repositorio de respuestas de queja usando MongoDB
+ * Complaint response repository port implementation using MongoDB
  */
 @Slf4j
 @Component
@@ -23,7 +23,7 @@ public class ComplaintResponseRepositoryImpl implements IComplaintResponseReposi
 
     @Override
     public Mono<ComplaintResponse> save(ComplaintResponse response) {
-        log.debug("Guardando respuesta de queja: {}", response.getId());
+        log.debug("Saving response de complaint: {}", response.getId());
         ComplaintResponseDocument document = toDocument(response);
         document.prePersist();
         return responseRepository.save(document)
@@ -32,21 +32,21 @@ public class ComplaintResponseRepositoryImpl implements IComplaintResponseReposi
 
     @Override
     public Mono<ComplaintResponse> findById(String id) {
-        log.debug("Buscando respuesta por ID: {}", id);
+        log.debug("Finding response by ID: {}", id);
         return responseRepository.findById(id)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<ComplaintResponse> findByComplaintId(String complaintId) {
-        log.debug("Buscando respuestas por queja: {}", complaintId);
+        log.debug("Finding responses by complaint: {}", complaintId);
         return responseRepository.findByComplaintId(complaintId)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<ComplaintResponse> findByUserId(String userId) {
-        log.debug("Buscando respuestas por usuario: {}", userId);
+        log.debug("Finding responses by user: {}", userId);
         return responseRepository.findAll()
                 .filter(doc -> userId.equals(doc.getRespondedByUserId()))
                 .map(this::toDomain);
@@ -54,20 +54,20 @@ public class ComplaintResponseRepositoryImpl implements IComplaintResponseReposi
 
     @Override
     public Mono<Long> countByComplaintId(String complaintId) {
-        log.debug("Contando respuestas de queja: {}", complaintId);
+        log.debug("Contando responses de complaint: {}", complaintId);
         return responseRepository.findByComplaintId(complaintId)
                 .count();
     }
 
     @Override
     public Mono<Void> deleteByComplaintId(String complaintId) {
-        log.debug("Eliminando respuestas de queja: {}", complaintId);
+        log.debug("Deleting responses de complaint: {}", complaintId);
         return responseRepository.findByComplaintId(complaintId)
                 .flatMap(doc -> responseRepository.deleteById(doc.getId()))
                 .then();
     }
 
-    // ========== Métodos de mapeo ==========
+    // ========== Mapping methods ==========
 
     private ComplaintResponse toDomain(ComplaintResponseDocument document) {
         return ComplaintResponse.builder()

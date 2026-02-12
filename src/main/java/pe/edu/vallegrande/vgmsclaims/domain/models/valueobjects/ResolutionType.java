@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects;
 
 /**
- * Enum que representa el tipo de resolución de un incidente
+ * Enum representing the resolution type of an incident
  */
 public enum ResolutionType {
     REPARACION_TEMPORAL,

@@ -5,15 +5,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.ComplaintResponse;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de agregar respuesta a queja
+ * Input port for the add response to complaint use case
  */
 public interface IAddResponseUseCase {
     
     /**
-     * Agrega una respuesta a una queja
-     * @param complaintId identificador de la queja
-     * @param response datos de la respuesta
-     * @return la queja con la respuesta agregada
+     * Adds a response to a complaint
+     * @param complaintId identifier of the complaint
+     * @param response response data
+     * @return the complaint with the added response
      */
     Mono<Complaint> execute(String complaintId, ComplaintResponse response);
 }

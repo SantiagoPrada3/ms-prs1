@@ -6,7 +6,7 @@ import pe.edu.vallegrande.vgmsclaims.infrastructure.persistence.documents.Compla
 import reactor.core.publisher.Flux;
 
 /**
- * Repositorio MongoDB reactivo para categorías de quejas
+ * Reactive MongoDB repository for complaint categories
  */
 @Repository
 public interface ComplaintCategoryMongoRepository extends ReactiveMongoRepository<ComplaintCategoryDocument, String> {

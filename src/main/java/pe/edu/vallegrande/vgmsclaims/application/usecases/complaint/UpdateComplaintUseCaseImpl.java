@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para actualizar quejas
+ * Use case implementation for updating complaints
  */
 @Slf4j
 @Service
@@ -26,12 +26,12 @@ public class UpdateComplaintUseCaseImpl implements IUpdateComplaintUseCase {
     
     @Override
     public Mono<Complaint> execute(String id, Complaint updatedData) {
-        log.info("Actualizando queja con ID: {}", id);
+        log.info("Updating complaint with ID: {}", id);
         
         return complaintRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ComplaintNotFoundException(id)))
                 .flatMap(existing -> {
-                    // Actualizar campos permitidos
+                    // Update allowed fields
                     if (updatedData.getSubject() != null) {
                         existing.setSubject(updatedData.getSubject());
                     }
@@ -56,10 +56,10 @@ public class UpdateComplaintUseCaseImpl implements IUpdateComplaintUseCase {
                     return complaintRepository.save(existing);
                 })
                 .doOnSuccess(saved -> {
-                    log.info("Queja actualizada: {}", saved.getComplaintCode());
+                    log.info("Complaint updated: {}", saved.getComplaintCode());
                     publishComplaintUpdatedEvent(saved);
                 })
-                .doOnError(error -> log.error("Error al actualizar queja: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error updating complaint: {}", error.getMessage()));
     }
     
     private void publishComplaintUpdatedEvent(Complaint complaint) {
@@ -72,7 +72,7 @@ public class UpdateComplaintUseCaseImpl implements IUpdateComplaintUseCase {
                     .build();
             eventPublisher.publishComplaintUpdated(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de queja actualizada: {}", e.getMessage());
+            log.warn("Could not publish complaint updated event: {}", e.getMessage());
         }
     }
 }

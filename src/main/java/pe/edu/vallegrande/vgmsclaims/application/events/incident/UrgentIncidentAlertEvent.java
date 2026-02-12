@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * Evento de alerta para incidentes urgentes (severidad CRITICAL)
+ * Alert event for urgent incidents (CRITICAL severity)
  */
 @Data
 @Builder

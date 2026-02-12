@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del puerto de repositorio de quejas usando MongoDB
+ * Complaint repository port implementation using MongoDB
  */
 @Slf4j
 @Component
@@ -23,56 +23,56 @@ public class ComplaintRepositoryImpl implements IComplaintRepository {
 
     @Override
     public Mono<Complaint> save(Complaint complaint) {
-        log.debug("Guardando queja: {}", complaint.getId());
+        log.debug("Saving complaint: {}", complaint.getId());
         return complaintRepository.save(mapper.toDocument(complaint))
                 .map(mapper::toDomain);
     }
 
     @Override
     public Mono<Complaint> findById(String id) {
-        log.debug("Buscando queja por ID: {}", id);
+        log.debug("Finding complaint by ID: {}", id);
         return complaintRepository.findById(id)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Complaint> findAll() {
-        log.debug("Buscando todas las quejas");
+        log.debug("Finding all the complaints");
         return complaintRepository.findAll()
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Complaint> findByOrganizationId(String organizationId) {
-        log.debug("Buscando quejas por organización: {}", organizationId);
+        log.debug("Finding complaints by organization: {}", organizationId);
         return complaintRepository.findByOrganizationId(organizationId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Complaint> findByUserId(String userId) {
-        log.debug("Buscando quejas por usuario: {}", userId);
+        log.debug("Finding complaints by user: {}", userId);
         return complaintRepository.findByUserId(userId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Complaint> findByStatus(String status) {
-        log.debug("Buscando quejas por estado: {}", status);
+        log.debug("Finding complaints by status: {}", status);
         return complaintRepository.findByStatus(status)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Flux<Complaint> findByCategoryId(String categoryId) {
-        log.debug("Buscando quejas por categoría: {}", categoryId);
+        log.debug("Finding complaints by category: {}", categoryId);
         return complaintRepository.findByCategoryId(categoryId)
                 .map(mapper::toDomain);
     }
 
     @Override
     public Mono<Void> deleteById(String id) {
-        log.debug("Eliminando queja: {}", id);
+        log.debug("Deleting complaint: {}", id);
         return complaintRepository.deleteById(id);
     }
 

@@ -5,42 +5,47 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 /**
- * Puerto de salida para el cliente del servicio de infraestructura
+ * Output port for the infrastructure service client
  */
 public interface IInfrastructureClient {
-    
+
     /**
-     * Obtiene información de una zona por su ID
-     * @param zoneId identificador de la zona
-     * @return datos de la zona
+     * Gets information of a zone by its ID
+     * 
+     * @param zoneId identifier of the zone
+     * @return data of the zone
      */
     Mono<Map<String, Object>> getZoneById(String zoneId);
-    
+
     /**
-     * Obtiene información de una caja de agua por su ID
-     * @param waterBoxId identificador de la caja de agua
-     * @return datos de la caja de agua
+     * Gets information of a water box by its ID
+     * 
+     * @param waterBoxId identifier of the water box
+     * @return water box data
      */
     Mono<Map<String, Object>> getWaterBoxById(String waterBoxId);
-    
+
     /**
-     * Verifica si una zona existe
-     * @param zoneId identificador de la zona
-     * @return true si existe
+     * Checks if a zone exists
+     * 
+     * @param zoneId identifier of the zone
+     * @return true if it exists
      */
     Mono<Boolean> existsZone(String zoneId);
-    
+
     /**
-     * Verifica si una caja de agua existe
-     * @param waterBoxId identificador de la caja de agua
-     * @return true si existe
+     * Checks if a water box exists
+     * 
+     * @param waterBoxId identifier of the water box
+     * @return true if it exists
      */
     Mono<Boolean> existsWaterBox(String waterBoxId);
-    
+
     /**
-     * Obtiene cajas de agua de una zona
-     * @param zoneId identificador de la zona
-     * @return lista de cajas de agua
+     * Gets water boxes of a zone
+     * 
+     * @param zoneId identifier of the zone
+     * @return list of water boxes
      */
     Mono<java.util.List<Map<String, Object>>> getWaterBoxesByZone(String zoneId);
 }

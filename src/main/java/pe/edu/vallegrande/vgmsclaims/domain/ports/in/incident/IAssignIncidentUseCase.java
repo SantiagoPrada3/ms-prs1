@@ -4,15 +4,16 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Incident;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de asignar incidente
+ * Input port for the assign incident use case
  */
 public interface IAssignIncidentUseCase {
-    
+
     /**
-     * Asigna un técnico a un incidente
-     * @param incidentId identificador del incidente
-     * @param userId identificador del técnico a asignar
-     * @return el incidente con la asignación
+     * Assigns a technician to an incident
+     * 
+     * @param incidentId identifier of the incident
+     * @param userId     identifier of the technician to assign
+     * @return the incident with the assignment
      */
     Mono<Incident> execute(String incidentId, String userId);
 }

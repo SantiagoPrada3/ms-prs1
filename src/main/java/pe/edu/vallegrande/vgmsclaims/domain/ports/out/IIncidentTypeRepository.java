@@ -5,57 +5,57 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de salida para el repositorio de tipos de incidente
+ * Output port for the incident type repository
  */
 public interface IIncidentTypeRepository {
     
     /**
-     * Guarda un tipo de incidente
-     * @param incidentType tipo de incidente a guardar
-     * @return el tipo de incidente guardado
+     * Saves an incident type
+     * @param incidentType incident type to save
+     * @return the saved incident type
      */
     Mono<IncidentType> save(IncidentType incidentType);
     
     /**
-     * Busca un tipo de incidente por su ID
-     * @param id identificador del tipo de incidente
-     * @return el tipo de incidente encontrado
+     * Finds an incident type by its ID
+     * @param id identifier of the incident type
+     * @return the found incident type
      */
     Mono<IncidentType> findById(String id);
     
     /**
-     * Obtiene todos los tipos de incidente
-     * @return lista de tipos de incidente
+     * Gets all incident types
+     * @return list of incident types
      */
     Flux<IncidentType> findAll();
     
     /**
-     * Busca tipos de incidente por organización
-     * @param organizationId identificador de la organización
-     * @return lista de tipos de incidente
+     * Finds incident types by organization
+     * @param organizationId identifier of the organization
+     * @return list of incident types
      */
     Flux<IncidentType> findByOrganizationId(String organizationId);
     
     /**
-     * Busca tipos de incidente activos por organización
-     * @param organizationId identificador de la organización
-     * @return lista de tipos de incidente activos
+     * Finds active incident types by organization
+     * @param organizationId identifier of the organization
+     * @return list of incident types activos
      */
     Flux<IncidentType> findActiveByOrganizationId(String organizationId);
     
     /**
-     * Busca un tipo de incidente por código
-     * @param typeCode código del tipo de incidente
-     * @param organizationId identificador de la organización
-     * @return el tipo de incidente encontrado
+     * Finds an incident type by code
+     * @param typeCode incident type code
+     * @param organizationId identifier of the organization
+     * @return the found incident type
      */
     Mono<IncidentType> findByTypeCodeAndOrganizationId(String typeCode, String organizationId);
     
     /**
-     * Verifica si existe un tipo de incidente con el código dado
-     * @param typeCode código del tipo de incidente
-     * @param organizationId identificador de la organización
-     * @return true si existe
+     * Checks if an incident type with the given code exists
+     * @param typeCode incident type code
+     * @param organizationId identifier of the organization
+     * @return true if it exists
      */
     Mono<Boolean> existsByTypeCodeAndOrganizationId(String typeCode, String organizationId);
 }

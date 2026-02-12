@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 /**
- * Documento embebido que representa un material usado en una resolución de incidente.
- * Se almacena como parte de IncidentResolutionDocument.
+ * Embedded document representing a material used in an incident resolution.
+ * Stored as part of IncidentResolutionDocument.
  */
 @Data
 @Builder
@@ -23,7 +23,7 @@ public class MaterialUsedEmbedded {
     private BigDecimal unitCost;
     
     /**
-     * Calcula el costo total del material
+     * Calculates total cost of material
      */
     public BigDecimal getTotalCost() {
         if (quantity == null || unitCost == null) {

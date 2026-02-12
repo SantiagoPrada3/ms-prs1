@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- * Clase estándar para mensajes de error
+ * Standard class for error messages
  */
 @Data
 @Builder

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * DTO para crear un nuevo incidente
+ * DTO to create a new incident
  */
 @Data
 @Builder
@@ -20,23 +20,23 @@ public class CreateIncidentRequest {
     
     private String incidentCode;
     
-    @NotBlank(message = "El título es requerido")
+    @NotBlank(message = "Title is required")
     private String title;
     
-    @NotBlank(message = "La descripción es requerida")
+    @NotBlank(message = "Description is required")
     private String description;
     
-    @NotNull(message = "El tipo de incidente es requerido")
+    @NotNull(message = "Incident type is required")
     private String incidentTypeId;
     
     private String incidentCategory;
     
-    @NotNull(message = "La zona es requerida")
+    @NotNull(message = "Zone is required")
     private String zoneId;
     
     private Instant incidentDate;
     
-    @NotNull(message = "La severidad es requerida")
+    @NotNull(message = "Severity is required")
     private String severity;
     
     private String status;

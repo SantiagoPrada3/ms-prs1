@@ -5,15 +5,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.IncidentResolution;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de resolver incidente
+ * Input port for the resolve incident use case
  */
 public interface IResolveIncidentUseCase {
     
     /**
-     * Resuelve un incidente
-     * @param incidentId identificador del incidente
-     * @param resolution datos de la resolución
-     * @return el incidente resuelto
+     * Resolves an incident
+     * @param incidentId identifier of the incident
+     * @param resolution data of the resolution
+     * @return the resolved incident
      */
     Mono<Incident> execute(String incidentId, IncidentResolution resolution);
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * Wrapper estándar para respuestas de API
+ * Standard wrapper for API responses
  */
 @Data
 @Builder

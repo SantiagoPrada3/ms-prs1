@@ -4,14 +4,14 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Incident;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de cerrar incidente
+ * Input port for the close incident use case
  */
 public interface ICloseIncidentUseCase {
     
     /**
-     * Cierra un incidente
-     * @param id identificador del incidente
-     * @return el incidente cerrado
+     * Closes an incident
+     * @param id identifier of the incident
+     * @return the closed incident
      */
     Mono<Incident> execute(String id);
 }

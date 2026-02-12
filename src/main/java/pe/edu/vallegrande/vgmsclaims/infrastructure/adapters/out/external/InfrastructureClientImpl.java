@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Cliente para comunicación con el microservicio de infraestructura
+ * Client for communication with the organizations/infrastructure microservice.
  */
 @Slf4j
 @Component
@@ -22,75 +22,78 @@ public class InfrastructureClientImpl implements IInfrastructureClient {
 
     private final WebClient.Builder webClientBuilder;
 
-    @Value("${services.infrastructure-service.url:http://localhost:8082}")
+    @Value("${services.organizations.url:http://localhost:8082}")
     private String infrastructureServiceUrl;
 
     @Override
     public Mono<Map<String, Object>> getZoneById(String zoneId) {
-        log.debug("Obteniendo zona por ID: {}", zoneId);
+        log.debug("Fetching zone by ID: {}", zoneId);
         return webClientBuilder.build()
                 .get()
                 .uri(infrastructureServiceUrl + "/api/zones/{zoneId}", zoneId)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                })
                 .onErrorResume(e -> {
-                    log.warn("Error obteniendo zona {}: {}", zoneId, e.getMessage());
+                    log.warn("Error fetching zone {}: {}", zoneId, e.getMessage());
                     return Mono.empty();
                 });
     }
 
     @Override
     public Mono<Map<String, Object>> getWaterBoxById(String waterBoxId) {
-        log.debug("Obteniendo caja de agua por ID: {}", waterBoxId);
+        log.debug("Fetching water box by ID: {}", waterBoxId);
         return webClientBuilder.build()
                 .get()
                 .uri(infrastructureServiceUrl + "/api/water-boxes/{waterBoxId}", waterBoxId)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                })
                 .onErrorResume(e -> {
-                    log.warn("Error obteniendo caja de agua {}: {}", waterBoxId, e.getMessage());
+                    log.warn("Error fetching water box {}: {}", waterBoxId, e.getMessage());
                     return Mono.empty();
                 });
     }
 
     @Override
     public Mono<Boolean> existsZone(String zoneId) {
-        log.debug("Verificando existencia de zona: {}", zoneId);
+        log.debug("Checking zone existence: {}", zoneId);
         return webClientBuilder.build()
                 .get()
                 .uri(infrastructureServiceUrl + "/api/zones/{zoneId}/exists", zoneId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .onErrorResume(e -> {
-                    log.warn("Error verificando zona {}: {}", zoneId, e.getMessage());
+                    log.warn("Error checking zone {}: {}", zoneId, e.getMessage());
                     return Mono.just(true);
                 });
     }
 
     @Override
     public Mono<Boolean> existsWaterBox(String waterBoxId) {
-        log.debug("Verificando existencia de caja de agua: {}", waterBoxId);
+        log.debug("Checking water box existence: {}", waterBoxId);
         return webClientBuilder.build()
                 .get()
                 .uri(infrastructureServiceUrl + "/api/water-boxes/{waterBoxId}/exists", waterBoxId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .onErrorResume(e -> {
-                    log.warn("Error verificando caja de agua {}: {}", waterBoxId, e.getMessage());
+                    log.warn("Error checking water box {}: {}", waterBoxId, e.getMessage());
                     return Mono.just(true);
                 });
     }
 
     @Override
     public Mono<List<Map<String, Object>>> getWaterBoxesByZone(String zoneId) {
-        log.debug("Obteniendo cajas de agua de zona: {}", zoneId);
+        log.debug("Fetching water boxes for zone: {}", zoneId);
         return webClientBuilder.build()
                 .get()
                 .uri(infrastructureServiceUrl + "/api/zones/{zoneId}/water-boxes", zoneId)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {})
+                .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {
+                })
                 .onErrorResume(e -> {
-                    log.warn("Error obteniendo cajas de agua de zona {}: {}", zoneId, e.getMessage());
+                    log.warn("Error fetching water boxes for zone {}: {}", zoneId, e.getMessage());
                     return Mono.empty();
                 });
     }

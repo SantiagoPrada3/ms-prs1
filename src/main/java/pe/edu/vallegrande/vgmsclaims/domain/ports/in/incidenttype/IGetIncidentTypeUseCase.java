@@ -5,34 +5,34 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de obtener tipos de incidente
+ * Input port for the get incident types use case
  */
 public interface IGetIncidentTypeUseCase {
     
     /**
-     * Obtiene todos los tipos de incidente
-     * @return lista de tipos de incidente
+     * Gets all incident types
+     * @return list of incident types
      */
     Flux<IncidentType> findAll();
     
     /**
-     * Obtiene un tipo de incidente por su ID
-     * @param id identificador del tipo de incidente
-     * @return el tipo de incidente encontrado
+     * Gets an incident type by its ID
+     * @param id identifier of the incident type
+     * @return the found incident type
      */
     Mono<IncidentType> findById(String id);
     
     /**
-     * Obtiene tipos de incidente por organización
-     * @param organizationId identificador de la organización
-     * @return lista de tipos de incidente de la organización
+     * Gets incident types by organization
+     * @param organizationId identifier of the organization
+     * @return list of incident types of the organization
      */
     Flux<IncidentType> findByOrganizationId(String organizationId);
     
     /**
-     * Obtiene tipos de incidente activos por organización
-     * @param organizationId identificador de la organización
-     * @return lista de tipos de incidente activos
+     * Gets active incident types by organization
+     * @param organizationId identifier of the organization
+     * @return list of incident types activos
      */
     Flux<IncidentType> findActiveByOrganizationId(String organizationId);
 }

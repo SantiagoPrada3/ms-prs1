@@ -8,19 +8,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para agregar una respuesta a una queja
+ * DTO to add a response to a complaint.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddResponseRequest {
-    
-    @NotNull(message = "El tipo de respuesta es requerido")
+
+    @NotNull(message = "Response type is required")
     private String responseType;
-    
-    @NotBlank(message = "El mensaje es requerido")
+
+    @NotBlank(message = "Message is required")
     private String message;
-    
+
     private String internalNotes;
 }

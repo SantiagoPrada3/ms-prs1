@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 /**
- * Evento emitido cuando se resuelve un incidente
+ * Event emitted when an incident is resolved
  */
 @Data
 @Builder

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * DTO de respuesta para incidentes
+ * Response DTO for incidents
  */
 @Data
 @Builder

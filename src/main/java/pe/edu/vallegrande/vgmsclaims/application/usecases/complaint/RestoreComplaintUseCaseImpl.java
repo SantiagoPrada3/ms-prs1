@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para restaurar quejas eliminadas
+ * Use case implementation for restoring deleted complaints
  */
 @Slf4j
 @Service
@@ -24,7 +24,7 @@ public class RestoreComplaintUseCaseImpl implements IRestoreComplaintUseCase {
     
     @Override
     public Mono<Complaint> execute(String id) {
-        log.info("Restaurando queja con ID: {}", id);
+        log.info("Restoring complaint with ID: {}", id);
         
         return complaintRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ComplaintNotFoundException(id)))
@@ -33,7 +33,7 @@ public class RestoreComplaintUseCaseImpl implements IRestoreComplaintUseCase {
                     complaint.setUpdatedAt(Instant.now());
                     return complaintRepository.save(complaint);
                 })
-                .doOnSuccess(restored -> log.info("Queja restaurada: {}", restored.getComplaintCode()))
-                .doOnError(error -> log.error("Error al restaurar queja: {}", error.getMessage()));
+                .doOnSuccess(restored -> log.info("Complaint restored: {}", restored.getComplaintCode()))
+                .doOnError(error -> log.error("Error restoring complaint: {}", error.getMessage()));
     }
 }

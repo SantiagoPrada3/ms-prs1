@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects;
 
 /**
- * Enum que representa el estado de un registro
+ * Enum representing the status of a record
  */
 public enum RecordStatus {
     ACTIVE,

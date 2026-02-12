@@ -5,57 +5,57 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de salida para el repositorio de categorías de queja
+ * Output port for the complaint category repository
  */
 public interface IComplaintCategoryRepository {
     
     /**
-     * Guarda una categoría de queja
-     * @param category categoría a guardar
-     * @return la categoría guardada
+     * Saves a complaint category
+     * @param category category to save
+     * @return the saved category
      */
     Mono<ComplaintCategory> save(ComplaintCategory category);
     
     /**
-     * Busca una categoría por su ID
-     * @param id identificador de la categoría
-     * @return la categoría encontrada
+     * Finds a category by its ID
+     * @param id identifier of the category
+     * @return the found category
      */
     Mono<ComplaintCategory> findById(String id);
     
     /**
-     * Obtiene todas las categorías
-     * @return lista de categorías
+     * Gets all categories
+     * @return list of categorys
      */
     Flux<ComplaintCategory> findAll();
     
     /**
-     * Busca categorías por organización
-     * @param organizationId identificador de la organización
-     * @return lista de categorías
+     * Finds categories by organization
+     * @param organizationId identifier of the organization
+     * @return list of categorys
      */
     Flux<ComplaintCategory> findByOrganizationId(String organizationId);
     
     /**
-     * Busca categorías activas por organización
-     * @param organizationId identificador de la organización
-     * @return lista de categorías activas
+     * Finds active categories by organization
+     * @param organizationId identifier of the organization
+     * @return list of categorys activas
      */
     Flux<ComplaintCategory> findActiveByOrganizationId(String organizationId);
     
     /**
-     * Busca una categoría por código
-     * @param categoryCode código de la categoría
-     * @param organizationId identificador de la organización
-     * @return la categoría encontrada
+     * Finds a category by code
+     * @param categoryCode category code
+     * @param organizationId identifier of the organization
+     * @return the found category
      */
     Mono<ComplaintCategory> findByCategoryCodeAndOrganizationId(String categoryCode, String organizationId);
     
     /**
-     * Verifica si existe una categoría con el código dado
-     * @param categoryCode código de la categoría
-     * @param organizationId identificador de la organización
-     * @return true si existe
+     * Checks if a category with the given code exists
+     * @param categoryCode category code
+     * @param organizationId identifier of the organization
+     * @return true if it exists
      */
     Mono<Boolean> existsByCategoryCodeAndOrganizationId(String categoryCode, String organizationId);
 }

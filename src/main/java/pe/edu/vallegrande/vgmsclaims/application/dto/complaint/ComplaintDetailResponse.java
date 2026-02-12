@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- * DTO de respuesta detallada para quejas (incluye respuestas)
+ * Detailed response DTO for complaints (includes responses).
  */
 @Data
 @Builder
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ComplaintDetailResponse {
-    
+
     private String id;
     private String organizationId;
     private String complaintCode;
@@ -40,9 +40,9 @@ public class ComplaintDetailResponse {
     private String recordStatus;
     private Instant createdAt;
     private Instant updatedAt;
-    
+
     private List<ResponseItem> responses;
-    
+
     @Data
     @Builder
     @NoArgsConstructor

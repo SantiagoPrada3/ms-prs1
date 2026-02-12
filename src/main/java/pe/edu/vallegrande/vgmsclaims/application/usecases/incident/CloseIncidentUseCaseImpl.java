@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para cerrar incidentes
+ * Use case implementation for closing incidents
  */
 @Slf4j
 @Service
@@ -28,7 +28,7 @@ public class CloseIncidentUseCaseImpl implements ICloseIncidentUseCase {
     
     @Override
     public Mono<Incident> execute(String id) {
-        log.info("Cerrando incidente con ID: {}", id);
+        log.info("Closing incident with ID: {}", id);
         
         return incidentRepository.findById(id)
                 .switchIfEmpty(Mono.error(new IncidentNotFoundException(id)))
@@ -36,23 +36,23 @@ public class CloseIncidentUseCaseImpl implements ICloseIncidentUseCase {
                     if (incident.getStatus() == IncidentStatus.CLOSED) {
                         return Mono.error(new BusinessRuleException(
                                 "ALREADY_CLOSED",
-                                "El incidente ya está cerrado"));
+                                "The incident is already closed"));
                     }
                     
                     if (!incident.canBeClosed()) {
                         return Mono.error(new BusinessRuleException(
                                 "INVALID_STATE",
-                                "El incidente no puede ser cerrado en su estado actual"));
+                                "The incident cannot be closed in its current state"));
                     }
                     
                     incident.close();
                     return incidentRepository.save(incident);
                 })
                 .doOnSuccess(saved -> {
-                    log.info("Incidente cerrado: {}", saved.getIncidentCode());
+                    log.info("Incident closed: {}", saved.getIncidentCode());
                     publishIncidentClosedEvent(saved);
                 })
-                .doOnError(error -> log.error("Error al cerrar incidente: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error closing incident: {}", error.getMessage()));
     }
     
     private void publishIncidentClosedEvent(Incident incident) {
@@ -64,7 +64,7 @@ public class CloseIncidentUseCaseImpl implements ICloseIncidentUseCase {
                     .build();
             eventPublisher.publishIncidentClosed(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de incidente cerrado: {}", e.getMessage());
+            log.warn("Could not publish incident closed event: {}", e.getMessage());
         }
     }
 }

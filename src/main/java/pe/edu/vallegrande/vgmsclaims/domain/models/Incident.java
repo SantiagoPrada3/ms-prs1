@@ -11,8 +11,8 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.RecordStatus;
 import java.time.Instant;
 
 /**
- * Entidad de dominio que representa un Incidente de infraestructura.
- * No contiene anotaciones de infraestructura (MongoDB, JPA, etc.)
+ * Domain entity representing an infrastructure Incident.
+ * Does not contain infrastructure annotations (MongoDB, JPA, etc.)
  */
 @Data
 @Builder
@@ -48,46 +48,46 @@ public class Incident {
     private Instant updatedAt;
 
     /**
-     * Verifica si el incidente es crítico
+     * Checks if incident is critical
      */
     public boolean isCritical() {
         return severity == IncidentSeverity.CRITICAL;
     }
 
     /**
-     * Verifica si el incidente está activo
+     * Checks if incident is active
      */
     public boolean isActive() {
         return recordStatus == RecordStatus.ACTIVE;
     }
 
     /**
-     * Verifica si el incidente puede ser asignado
+     * Checks if incident can be assigned
      */
     public boolean canBeAssigned() {
         return status == IncidentStatus.REPORTED && isActive();
     }
 
     /**
-     * Verifica si el incidente puede ser resuelto
+     * Checks if incident can be resolved
      */
     public boolean canBeResolved() {
         return (status == IncidentStatus.ASSIGNED || status == IncidentStatus.IN_PROGRESS) && isActive();
     }
 
     /**
-     * Verifica si el incidente puede ser cerrado
+     * Checks if incident can be closed
      */
     public boolean canBeClosed() {
         return status == IncidentStatus.RESOLVED && isActive();
     }
 
     /**
-     * Asigna un técnico al incidente
+     * Assigns a technician to the incident
      */
     public void assignTo(String userId) {
         if (!canBeAssigned()) {
-            throw new IllegalStateException("El incidente no puede ser asignado en su estado actual");
+            throw new IllegalStateException("The incident cannot be assigned in its current state");
         }
         this.assignedToUserId = userId;
         this.status = IncidentStatus.ASSIGNED;
@@ -95,22 +95,22 @@ public class Incident {
     }
 
     /**
-     * Marca el incidente como en progreso
+     * Marks the incident as in progress
      */
     public void startProgress() {
         if (status != IncidentStatus.ASSIGNED) {
-            throw new IllegalStateException("El incidente debe estar asignado para iniciar progreso");
+            throw new IllegalStateException("The incident must be assigned to start progress");
         }
         this.status = IncidentStatus.IN_PROGRESS;
         this.updatedAt = Instant.now();
     }
 
     /**
-     * Resuelve el incidente
+     * Resolves the incident
      */
     public void resolve(String userId, String notes) {
         if (!canBeResolved()) {
-            throw new IllegalStateException("El incidente no puede ser resuelto en su estado actual");
+            throw new IllegalStateException("The incident cannot be resolved in its current state");
         }
         this.resolvedByUserId = userId;
         this.resolutionNotes = notes;
@@ -120,11 +120,11 @@ public class Incident {
     }
 
     /**
-     * Cierra el incidente
+     * Closes the incident
      */
     public void close() {
         if (!canBeClosed()) {
-            throw new IllegalStateException("El incidente no puede ser cerrado en su estado actual");
+            throw new IllegalStateException("The incident cannot be closed in its current state");
         }
         this.status = IncidentStatus.CLOSED;
         this.updatedAt = Instant.now();

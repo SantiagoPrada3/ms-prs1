@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para actualizar un incidente existente
+ * DTO to update an existing incident
  */
 @Data
 @Builder

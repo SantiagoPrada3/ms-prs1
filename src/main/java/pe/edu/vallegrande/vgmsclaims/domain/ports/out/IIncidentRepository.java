@@ -5,97 +5,97 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de salida para el repositorio de incidentes
+ * Output port for the incident repository
  */
 public interface IIncidentRepository {
     
     /**
-     * Guarda un incidente
-     * @param incident incidente a guardar
-     * @return el incidente guardado
+     * Saves an incident
+     * @param incident incident to save
+     * @return the saved incident
      */
     Mono<Incident> save(Incident incident);
     
     /**
-     * Busca un incidente por su ID
-     * @param id identificador del incidente
-     * @return el incidente encontrado
+     * Finds an incident by its ID
+     * @param id identifier of the incident
+     * @return the found incident
      */
     Mono<Incident> findById(String id);
     
     /**
-     * Obtiene todos los incidentes
-     * @return lista de incidentes
+     * Gets all incidents
+     * @return list of incidents
      */
     Flux<Incident> findAll();
     
     /**
-     * Busca incidentes por organización
-     * @param organizationId identificador de la organización
-     * @return lista de incidentes
+     * Finds incidents by organization
+     * @param organizationId identifier of the organization
+     * @return list of incidents
      */
     Flux<Incident> findByOrganizationId(String organizationId);
     
     /**
-     * Busca incidentes por zona
-     * @param zoneId identificador de la zona
-     * @return lista de incidentes
+     * Finds incidents by zone
+     * @param zoneId identifier of the zone
+     * @return list of incidents
      */
     Flux<Incident> findByZoneId(String zoneId);
     
     /**
-     * Busca incidentes por severidad
-     * @param severity severidad del incidente
-     * @return lista de incidentes
+     * Finds incidents by severity
+     * @param severity severity of the incident
+     * @return list of incidents
      */
     Flux<Incident> findBySeverity(String severity);
     
     /**
-     * Busca incidentes por estado
-     * @param status estado del incidente
-     * @return lista de incidentes
+     * Finds incidents by status
+     * @param status status of the incident
+     * @return list of incidents
      */
     Flux<Incident> findByStatus(String status);
     
     /**
-     * Busca incidentes por tipo
-     * @param incidentTypeId identificador del tipo
-     * @return lista de incidentes
+     * Finds incidents by type
+     * @param incidentTypeId identifier of the type
+     * @return list of incidents
      */
     Flux<Incident> findByIncidentTypeId(String incidentTypeId);
     
     /**
-     * Busca incidentes por usuario asignado
-     * @param assignedToUserId identificador del usuario asignado
-     * @return lista de incidentes
+     * Finds incidents by assigned user
+     * @param assignedToUserId identifier of the assigned user
+     * @return list of incidents
      */
     Flux<Incident> findByAssignedToUserId(String assignedToUserId);
     
     /**
-     * Busca incidentes por estado de resolución
-     * @param resolved estado de resolución
-     * @return lista de incidentes
+     * Finds incidents by resolution status
+     * @param resolved resolution status
+     * @return list of incidents
      */
     Flux<Incident> findByResolved(Boolean resolved);
     
     /**
-     * Busca incidentes por estado de registro
-     * @param recordStatus estado del registro
-     * @return lista de incidentes
+     * Finds incidents by record status
+     * @param recordStatus status of the record
+     * @return list of incidents
      */
     Flux<Incident> findByRecordStatus(String recordStatus);
     
     /**
-     * Elimina un incidente por su ID
-     * @param id identificador del incidente
+     * Deletes an incident by its ID
+     * @param id identifier of the incident
      * @return void
      */
     Mono<Void> deleteById(String id);
     
     /**
-     * Verifica si existe un incidente con el ID dado
-     * @param id identificador del incidente
-     * @return true si existe
+     * Checks if an incident with the given ID exists
+     * @param id identifier of the incident
+     * @return true if it exists
      */
     Mono<Boolean> existsById(String id);
 }

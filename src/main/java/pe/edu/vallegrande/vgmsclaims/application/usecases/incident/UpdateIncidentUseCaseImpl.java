@@ -14,24 +14,24 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para actualizar incidentes
+ * Use case implementation for updating incidents
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class UpdateIncidentUseCaseImpl implements IUpdateIncidentUseCase {
-    
+
     private final IIncidentRepository incidentRepository;
     private final IClaimsEventPublisher eventPublisher;
-    
+
     @Override
     public Mono<Incident> execute(String id, Incident updatedData) {
-        log.info("Actualizando incidente con ID: {}", id);
-        
+        log.info("Updating incident with ID: {}", id);
+
         return incidentRepository.findById(id)
                 .switchIfEmpty(Mono.error(new IncidentNotFoundException(id)))
                 .flatMap(existing -> {
-                    // Actualizar campos permitidos
+                    // Update allowed fields
                     if (updatedData.getTitle() != null) {
                         existing.setTitle(updatedData.getTitle());
                     }
@@ -50,18 +50,18 @@ public class UpdateIncidentUseCaseImpl implements IUpdateIncidentUseCase {
                     if (updatedData.getResolutionNotes() != null) {
                         existing.setResolutionNotes(updatedData.getResolutionNotes());
                     }
-                    
+
                     existing.setUpdatedAt(Instant.now());
-                    
+
                     return incidentRepository.save(existing);
                 })
                 .doOnSuccess(saved -> {
-                    log.info("Incidente actualizado: {}", saved.getIncidentCode());
+                    log.info("Incident updated: {}", saved.getIncidentCode());
                     publishIncidentUpdatedEvent(saved);
                 })
-                .doOnError(error -> log.error("Error al actualizar incidente: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error updating incident: {}", error.getMessage()));
     }
-    
+
     private void publishIncidentUpdatedEvent(Incident incident) {
         try {
             IncidentUpdatedEvent event = IncidentUpdatedEvent.builder()
@@ -73,7 +73,7 @@ public class UpdateIncidentUseCaseImpl implements IUpdateIncidentUseCase {
                     .build();
             eventPublisher.publishIncidentUpdated(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de incidente actualizado: {}", e.getMessage());
+            log.warn("Could not publish incident updated event: {}", e.getMessage());
         }
     }
 }

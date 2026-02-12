@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Implementación del puerto de repositorio de resoluciones de incidente usando MongoDB
+ * Incident resolution repository port implementation using MongoDB
  */
 @Slf4j
 @Component
@@ -28,7 +28,7 @@ public class IncidentResolutionRepositoryImpl implements IIncidentResolutionRepo
 
     @Override
     public Mono<IncidentResolution> save(IncidentResolution resolution) {
-        log.debug("Guardando resolución de incidente: {}", resolution.getId());
+        log.debug("Saving resolution de incident: {}", resolution.getId());
         IncidentResolutionDocument document = toDocument(resolution);
         document.prePersist();
         return resolutionRepository.save(document)
@@ -37,21 +37,21 @@ public class IncidentResolutionRepositoryImpl implements IIncidentResolutionRepo
 
     @Override
     public Mono<IncidentResolution> findById(String id) {
-        log.debug("Buscando resolución por ID: {}", id);
+        log.debug("Finding resolution by ID: {}", id);
         return resolutionRepository.findById(id)
                 .map(this::toDomain);
     }
 
     @Override
     public Mono<IncidentResolution> findByIncidentId(String incidentId) {
-        log.debug("Buscando resolución por incidente: {}", incidentId);
+        log.debug("Finding resolution by incident: {}", incidentId);
         return resolutionRepository.findByIncidentId(incidentId)
                 .map(this::toDomain);
     }
 
     @Override
     public Flux<IncidentResolution> findByTechnicianId(String technicianId) {
-        log.debug("Buscando resoluciones por técnico: {}", technicianId);
+        log.debug("Finding resoluciones by technician: {}", technicianId);
         return resolutionRepository.findAll()
                 .filter(doc -> technicianId.equals(doc.getResolvedByUserId()))
                 .map(this::toDomain);
@@ -59,7 +59,7 @@ public class IncidentResolutionRepositoryImpl implements IIncidentResolutionRepo
 
     @Override
     public Flux<IncidentResolution> findByResolutionType(String resolutionType) {
-        log.debug("Buscando resoluciones por tipo: {}", resolutionType);
+        log.debug("Finding resoluciones by type: {}", resolutionType);
         return resolutionRepository.findAll()
                 .filter(doc -> resolutionType.equals(doc.getResolutionType()))
                 .map(this::toDomain);
@@ -67,20 +67,20 @@ public class IncidentResolutionRepositoryImpl implements IIncidentResolutionRepo
 
     @Override
     public Mono<Boolean> existsByIncidentId(String incidentId) {
-        log.debug("Verificando existencia de resolución para incidente: {}", incidentId);
+        log.debug("Checking existencia de resolution para incident: {}", incidentId);
         return resolutionRepository.findByIncidentId(incidentId)
                 .hasElement();
     }
 
     @Override
     public Mono<Void> deleteByIncidentId(String incidentId) {
-        log.debug("Eliminando resolución del incidente: {}", incidentId);
+        log.debug("Deleting resolution of the incident: {}", incidentId);
         return resolutionRepository.findByIncidentId(incidentId)
                 .flatMap(doc -> resolutionRepository.deleteById(doc.getId()))
                 .then();
     }
 
-    // ========== Métodos de mapeo ==========
+    // ========== Mapping methods ==========
 
     private IncidentResolution toDomain(IncidentResolutionDocument document) {
         return IncidentResolution.builder()

@@ -4,15 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Complaint;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de cerrar queja
+ * Input port for the close complaint use case
  */
 public interface ICloseComplaintUseCase {
     
     /**
-     * Cierra una queja
-     * @param id identificador de la queja
-     * @param satisfactionRating calificación de satisfacción (1-5)
-     * @return la queja cerrada
+     * Closes a complaint
+     * @param id identifier of the complaint
+     * @param satisfactionRating satisfaction rating (1-5)
+     * @return the closed complaint
      */
     Mono<Complaint> execute(String id, Integer satisfactionRating);
 }

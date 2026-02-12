@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- * DTO de respuesta detallada para incidentes (incluye resolución)
+ * Detailed response DTO for incidents (includes resolution)
  */
 @Data
 @Builder

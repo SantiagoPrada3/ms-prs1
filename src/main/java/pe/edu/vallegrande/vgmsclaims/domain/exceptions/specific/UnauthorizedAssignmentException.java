@@ -3,18 +3,18 @@ package pe.edu.vallegrande.vgmsclaims.domain.exceptions.specific;
 import pe.edu.vallegrande.vgmsclaims.domain.exceptions.base.BusinessRuleException;
 
 /**
- * Excepción cuando un usuario no tiene permisos para asignar un recurso
+ * Exception when a user does not have permissions to assign a resource
  */
 public class UnauthorizedAssignmentException extends BusinessRuleException {
     
     public UnauthorizedAssignmentException(String userId, String resourceType) {
         super("UNAUTHORIZED_ASSIGNMENT", 
-              String.format("El usuario '%s' no tiene permisos para asignar el %s", userId, resourceType));
+              String.format("User '%s' does not have permissions to assign %s", userId, resourceType));
     }
     
     public UnauthorizedAssignmentException(String userId, String resourceType, String resourceId) {
         super("UNAUTHORIZED_ASSIGNMENT", 
-              String.format("El usuario '%s' no tiene permisos para asignar el %s con id '%s'", 
+              String.format("User '%s' does not have permissions to assign %s with id '%s'", 
                            userId, resourceType, resourceId));
     }
 }

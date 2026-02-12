@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Cliente para comunicación con el microservicio de usuarios
+ * Client for communication with the users microservice.
  */
 @Slf4j
 @Component
@@ -22,61 +22,64 @@ public class UserServiceClientImpl implements IUserServiceClient {
 
     private final WebClient.Builder webClientBuilder;
 
-    @Value("${services.user-service.url:http://localhost:8081}")
+    @Value("${services.users.url:http://localhost:8081}")
     private String userServiceUrl;
 
     @Override
     public Mono<Map<String, Object>> getUserById(String userId) {
-        log.debug("Obteniendo usuario por ID: {}", userId);
+        log.debug("Fetching user by ID: {}", userId);
         return webClientBuilder.build()
                 .get()
                 .uri(userServiceUrl + "/api/users/{userId}", userId)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                })
                 .onErrorResume(e -> {
-                    log.warn("Error obteniendo usuario {}: {}", userId, e.getMessage());
+                    log.warn("Error fetching user {}: {}", userId, e.getMessage());
                     return Mono.empty();
                 });
     }
 
     @Override
     public Mono<Map<String, Object>> getUserByEmail(String email) {
-        log.debug("Obteniendo usuario por email: {}", email);
+        log.debug("Fetching user by email: {}", email);
         return webClientBuilder.build()
                 .get()
                 .uri(userServiceUrl + "/api/users/email/{email}", email)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {})
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                })
                 .onErrorResume(e -> {
-                    log.warn("Error obteniendo usuario por email {}: {}", email, e.getMessage());
+                    log.warn("Error fetching user by email {}: {}", email, e.getMessage());
                     return Mono.empty();
                 });
     }
 
     @Override
     public Mono<Boolean> existsUser(String userId) {
-        log.debug("Verificando existencia de usuario: {}", userId);
+        log.debug("Checking user existence: {}", userId);
         return webClientBuilder.build()
                 .get()
                 .uri(userServiceUrl + "/api/users/{userId}/exists", userId)
                 .retrieve()
                 .bodyToMono(Boolean.class)
                 .onErrorResume(e -> {
-                    log.warn("Error verificando usuario {}: {}", userId, e.getMessage());
+                    log.warn("Error checking user {}: {}", userId, e.getMessage());
                     return Mono.just(true);
                 });
     }
 
     @Override
     public Mono<List<Map<String, Object>>> getUsersByOrganization(String organizationId) {
-        log.debug("Obteniendo usuarios por organización: {}", organizationId);
+        log.debug("Fetching users by organization: {}", organizationId);
         return webClientBuilder.build()
                 .get()
                 .uri(userServiceUrl + "/api/users/organization/{organizationId}", organizationId)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {})
+                .bodyToMono(new ParameterizedTypeReference<List<Map<String, Object>>>() {
+                })
                 .onErrorResume(e -> {
-                    log.warn("Error obteniendo usuarios de organización {}: {}", organizationId, e.getMessage());
+                    log.warn("Error fetching users for organization {}: {}", organizationId, e.getMessage());
                     return Mono.empty();
                 });
     }

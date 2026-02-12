@@ -4,14 +4,14 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.ComplaintCategory;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de restaurar categoría de queja
+ * Input port for the restore complaint category use case
  */
 public interface IRestoreComplaintCategoryUseCase {
     
     /**
-     * Restaura una categoría de queja eliminada
-     * @param id identificador de la categoría
-     * @return la categoría restaurada
+     * Restores a deleted complaint category
+     * @param id identifier of the category
+     * @return la category restaurada
      */
     Mono<ComplaintCategory> execute(String id);
 }

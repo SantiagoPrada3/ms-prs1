@@ -8,13 +8,13 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.ComplaintPriorit
 import pe.edu.vallegrande.vgmsclaims.infrastructure.persistence.documents.ComplaintDocument;
 
 /**
- * Mapper para conversiones de Complaint
+ * Mapper for Complaint conversions
  */
 @Component
 public class ComplaintMapper {
     
     /**
-     * Convierte un request de creación a modelo de dominio
+     * Converts a creation request to domain model
      */
     public Complaint toDomain(CreateComplaintRequest request) {
         return Complaint.builder()
@@ -28,7 +28,7 @@ public class ComplaintMapper {
     }
     
     /**
-     * Convierte un documento a modelo de dominio
+     * Converts a document to domain model
      */
     public Complaint toDomain(ComplaintDocument document) {
         return Complaint.builder()
@@ -54,7 +54,7 @@ public class ComplaintMapper {
     }
     
     /**
-     * Convierte un modelo de dominio a documento
+     * Converts a domain model to document
      */
     public ComplaintDocument toDocument(Complaint domain) {
         ComplaintDocument document = new ComplaintDocument();
@@ -80,7 +80,7 @@ public class ComplaintMapper {
     }
     
     /**
-     * Convierte un modelo de dominio a DTO de respuesta
+     * Converts a domain model to response DTO
      */
     public ComplaintResponse toResponse(Complaint domain) {
         return ComplaintResponse.builder()

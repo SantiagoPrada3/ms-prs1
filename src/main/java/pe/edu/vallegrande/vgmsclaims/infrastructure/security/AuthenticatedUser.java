@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Representa la información del usuario autenticado extraída del gateway
+ * Represents the authenticated user information extracted from gateway headers.
  */
 @Data
 @Builder
@@ -22,32 +22,34 @@ public class AuthenticatedUser {
     private List<String> roles;
 
     /**
-     * Verifica si el usuario es superadministrador
+     * Checks if user is super administrator.
      */
     public boolean isSuperAdmin() {
         return roles != null && roles.contains("SUPER_ADMIN");
     }
 
     /**
-     * Verifica si el usuario es administrador
+     * Checks if user is administrator.
      */
     public boolean isAdmin() {
         return roles != null && (roles.contains("ADMIN") || roles.contains("SUPER_ADMIN"));
     }
 
     /**
-     * Verifica si el usuario pertenece a una organización
+     * Checks if user belongs to an organization.
      */
     public boolean belongsToOrganization(String orgId) {
-        if (isSuperAdmin()) return true;
+        if (isSuperAdmin())
+            return true;
         return organizationId != null && organizationId.equals(orgId);
     }
 
     /**
-     * Verifica si el usuario puede crear un rol específico
+     * Checks if user can create a specific role.
      */
     public boolean canCreateRole(String role) {
-        if (isSuperAdmin()) return true;
+        if (isSuperAdmin())
+            return true;
         if (isAdmin()) {
             return !"SUPER_ADMIN".equals(role) && !"ADMIN".equals(role);
         }

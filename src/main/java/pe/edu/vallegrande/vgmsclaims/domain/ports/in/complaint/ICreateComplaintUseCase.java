@@ -4,14 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Complaint;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de crear queja
+ * Input port for el create use case complaint
  */
 public interface ICreateComplaintUseCase {
-    
+
     /**
-     * Crea una nueva queja
-     * @param complaint datos de la queja a crear
-     * @return la queja creada
+     * Creates a new complaint
+     * 
+     * @param complaint complaint data to create
+     * @return the created complaint
      */
     Mono<Complaint> execute(Complaint complaint);
 }

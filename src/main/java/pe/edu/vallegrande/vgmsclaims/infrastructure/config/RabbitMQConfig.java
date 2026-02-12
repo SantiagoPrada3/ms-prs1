@@ -5,83 +5,85 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuración de RabbitMQ para mensajería asíncrona
+ * RabbitMQ configuration for asynchronous messaging.
+ * Uses centralized exchange: jass.events
  */
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.exchange.claims:claims-exchange}")
-    private String claimsExchange;
+     public static final String EXCHANGE = "jass.events";
 
-    @Value("${rabbitmq.queue.complaints:complaints-queue}")
-    private String complaintsQueue;
+     // Exchange
+     @Bean
+     public TopicExchange jassEventsExchange() {
+          return new TopicExchange(EXCHANGE, true, false);
+     }
 
-    @Value("${rabbitmq.queue.incidents:incidents-queue}")
-    private String incidentsQueue;
+     // Queues
+     @Bean
+     public Queue complaintEventsQueue() {
+          return QueueBuilder.durable("complaint.events.queue").build();
+     }
 
-    @Value("${rabbitmq.queue.urgent:urgent-incidents-queue}")
-    private String urgentQueue;
+     @Bean
+     public Queue complaintResponseEventsQueue() {
+          return QueueBuilder.durable("complaint.response.events.queue").build();
+     }
 
-    // Exchange
-    @Bean
-    public TopicExchange claimsExchange() {
-        return new TopicExchange(claimsExchange);
-    }
+     @Bean
+     public Queue incidentEventsQueue() {
+          return QueueBuilder.durable("incident.events.queue").build();
+     }
 
-    // Queues
-    @Bean
-    public Queue complaintsQueue() {
-        return QueueBuilder.durable(complaintsQueue).build();
-    }
+     @Bean
+     public Queue incidentUrgentQueue() {
+          return QueueBuilder.durable("incident.urgent.queue").build();
+     }
 
-    @Bean
-    public Queue incidentsQueue() {
-        return QueueBuilder.durable(incidentsQueue).build();
-    }
+     // Bindings
+     @Bean
+     public Binding complaintBinding(Queue complaintEventsQueue, TopicExchange jassEventsExchange) {
+          return BindingBuilder.bind(complaintEventsQueue)
+                    .to(jassEventsExchange)
+                    .with("complaint.*");
+     }
 
-    @Bean
-    public Queue urgentIncidentsQueue() {
-        return QueueBuilder.durable(urgentQueue).build();
-    }
+     @Bean
+     public Binding complaintResponseBinding(Queue complaintResponseEventsQueue, TopicExchange jassEventsExchange) {
+          return BindingBuilder.bind(complaintResponseEventsQueue)
+                    .to(jassEventsExchange)
+                    .with("complaint.response.*");
+     }
 
-    // Bindings
-    @Bean
-    public Binding complaintsBinding(Queue complaintsQueue, TopicExchange claimsExchange) {
-        return BindingBuilder.bind(complaintsQueue)
-                .to(claimsExchange)
-                .with("complaint.*");
-    }
+     @Bean
+     public Binding incidentBinding(Queue incidentEventsQueue, TopicExchange jassEventsExchange) {
+          return BindingBuilder.bind(incidentEventsQueue)
+                    .to(jassEventsExchange)
+                    .with("incident.*");
+     }
 
-    @Bean
-    public Binding incidentsBinding(Queue incidentsQueue, TopicExchange claimsExchange) {
-        return BindingBuilder.bind(incidentsQueue)
-                .to(claimsExchange)
-                .with("incident.*");
-    }
+     @Bean
+     public Binding incidentUrgentBinding(Queue incidentUrgentQueue, TopicExchange jassEventsExchange) {
+          return BindingBuilder.bind(incidentUrgentQueue)
+                    .to(jassEventsExchange)
+                    .with("incident.urgent.*");
+     }
 
-    @Bean
-    public Binding urgentIncidentsBinding(Queue urgentIncidentsQueue, TopicExchange claimsExchange) {
-        return BindingBuilder.bind(urgentIncidentsQueue)
-                .to(claimsExchange)
-                .with("incident.urgent.*");
-    }
+     // Message Converter
+     @Bean
+     public MessageConverter jsonMessageConverter() {
+          return new Jackson2JsonMessageConverter();
+     }
 
-    // Message Converter
-    @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
-
-    // RabbitTemplate
-    @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jsonMessageConverter());
-        return rabbitTemplate;
-    }
+     // RabbitTemplate
+     @Bean
+     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+          RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+          rabbitTemplate.setMessageConverter(jsonMessageConverter());
+          return rabbitTemplate;
+     }
 }

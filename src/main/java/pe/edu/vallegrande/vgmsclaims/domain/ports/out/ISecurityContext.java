@@ -4,38 +4,43 @@ import pe.edu.vallegrande.vgmsclaims.infrastructure.security.AuthenticatedUser;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de salida para el contexto de seguridad
+ * Output port for the security context
  */
 public interface ISecurityContext {
-    
+
     /**
-     * Obtiene el usuario autenticado actual
-     * @return el usuario autenticado
+     * Gets the current authenticated user
+     * 
+     * @return the authenticated user
      */
     Mono<AuthenticatedUser> getCurrentUser();
-    
+
     /**
-     * Obtiene el ID del usuario autenticado actual
-     * @return el ID del usuario
+     * Gets the current authenticated user ID
+     * 
+     * @return the user ID
      */
     Mono<String> getCurrentUserId();
-    
+
     /**
-     * Obtiene el ID de la organización del usuario actual
-     * @return el ID de la organización
+     * Gets the organization ID of the current user
+     * 
+     * @return the organization ID
      */
     Mono<String> getCurrentOrganizationId();
-    
+
     /**
-     * Verifica si el usuario actual tiene un rol específico
-     * @param role rol a verificar
-     * @return true si tiene el rol
+     * Checks if the current user has a specific role
+     * 
+     * @param role role to verify
+     * @return true if has the role
      */
     Mono<Boolean> hasRole(String role);
-    
+
     /**
-     * Verifica si el usuario actual es administrador
-     * @return true si es administrador
+     * Checks if the current user is an administrator
+     * 
+     * @return true if administrator
      */
     Mono<Boolean> isAdmin();
 }

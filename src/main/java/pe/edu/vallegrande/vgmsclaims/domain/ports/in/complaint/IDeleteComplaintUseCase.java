@@ -4,14 +4,14 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Complaint;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de eliminar (soft delete) queja
+ * Input port for the soft delete complaint use case
  */
 public interface IDeleteComplaintUseCase {
     
     /**
-     * Elimina lógicamente una queja (soft delete)
-     * @param id identificador de la queja
-     * @return la queja eliminada
+     * Logically deletes a complaint (soft delete)
+     * @param id identifier of the complaint
+     * @return the deleted complaint
      */
     Mono<Complaint> execute(String id);
 }

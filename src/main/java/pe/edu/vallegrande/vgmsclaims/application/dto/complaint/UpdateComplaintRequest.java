@@ -8,14 +8,14 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * DTO para actualizar una queja existente
+ * DTO to update an existing complaint.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateComplaintRequest {
-    
+
     private String subject;
     private String description;
     private String priority;

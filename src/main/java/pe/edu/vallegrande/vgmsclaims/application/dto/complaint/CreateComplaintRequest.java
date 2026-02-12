@@ -8,23 +8,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para crear una nueva queja
+ * DTO to create a new complaint.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateComplaintRequest {
-    
-    @NotBlank(message = "El asunto es requerido")
+
+    @NotBlank(message = "Subject is required")
     private String subject;
-    
-    @NotBlank(message = "La descripción es requerida")
+
+    @NotBlank(message = "Description is required")
     private String description;
-    
-    @NotNull(message = "La categoría es requerida")
+
+    @NotNull(message = "Category is required")
     private String categoryId;
-    
+
     private String waterBoxId;
     private String priority;
     private String organizationId;

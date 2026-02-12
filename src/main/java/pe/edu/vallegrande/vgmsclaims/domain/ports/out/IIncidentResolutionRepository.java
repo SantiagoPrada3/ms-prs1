@@ -5,55 +5,55 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de salida para el repositorio de resoluciones de incidente
+ * Output port for the incident resolution repository
  */
 public interface IIncidentResolutionRepository {
     
     /**
-     * Guarda una resolución de incidente
-     * @param resolution resolución a guardar
-     * @return la resolución guardada
+     * Saves an incident resolution
+     * @param resolution resolution to save
+     * @return the saved resolution
      */
     Mono<IncidentResolution> save(IncidentResolution resolution);
     
     /**
-     * Busca una resolución por su ID
-     * @param id identificador de la resolución
-     * @return la resolución encontrada
+     * Finds a resolution by its ID
+     * @param id identifier of the resolution
+     * @return the found resolution
      */
     Mono<IncidentResolution> findById(String id);
     
     /**
-     * Obtiene la resolución de un incidente
-     * @param incidentId identificador del incidente
-     * @return la resolución del incidente
+     * Gets the resolution of an incident
+     * @param incidentId identifier of the incident
+     * @return the resolution of the incident
      */
     Mono<IncidentResolution> findByIncidentId(String incidentId);
     
     /**
-     * Obtiene resoluciones por técnico
-     * @param technicianId identificador del técnico
-     * @return lista de resoluciones
+     * Gets resolutions by technician
+     * @param technicianId identifier of the technician
+     * @return list of resoluciones
      */
     Flux<IncidentResolution> findByTechnicianId(String technicianId);
     
     /**
-     * Obtiene resoluciones por tipo de resolución
-     * @param resolutionType tipo de resolución
-     * @return lista de resoluciones
+     * Gets resolutions by resolution type
+     * @param resolutionType resolution type
+     * @return list of resoluciones
      */
     Flux<IncidentResolution> findByResolutionType(String resolutionType);
     
     /**
-     * Verifica si existe una resolución para un incidente
-     * @param incidentId identificador del incidente
-     * @return true si existe
+     * Checks if a resolution exists for an incident
+     * @param incidentId identifier of the incident
+     * @return true if it exists
      */
     Mono<Boolean> existsByIncidentId(String incidentId);
     
     /**
-     * Elimina la resolución de un incidente
-     * @param incidentId identificador del incidente
+     * Deletes the resolution of an incident
+     * @param incidentId identifier of the incident
      * @return void
      */
     Mono<Void> deleteByIncidentId(String incidentId);

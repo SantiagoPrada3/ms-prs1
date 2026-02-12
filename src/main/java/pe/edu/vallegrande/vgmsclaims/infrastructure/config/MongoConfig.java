@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 import java.util.Collections;
 
 /**
- * Configuración de MongoDB para operaciones reactivas
+ * MongoDB configuration for reactive operations.
  */
 @Configuration
 @EnableReactiveMongoAuditing

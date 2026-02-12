@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Wrapper estándar para respuestas paginadas
+ * Standard wrapper for paginated responses
  */
 @Data
 @Builder

@@ -4,14 +4,14 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Incident;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de crear incidente
+ * Input port for the create incident use case
  */
 public interface ICreateIncidentUseCase {
     
     /**
-     * Crea un nuevo incidente
-     * @param incident datos del incidente a crear
-     * @return el incidente creado
+     * Creates a new incident
+     * @param incident incident data to create
+     * @return the created incident
      */
     Mono<Incident> execute(Incident incident);
 }

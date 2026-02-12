@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso de actualizar tipo de incidente
+ * Use case implementation for updating incident types
  */
 @Slf4j
 @Service

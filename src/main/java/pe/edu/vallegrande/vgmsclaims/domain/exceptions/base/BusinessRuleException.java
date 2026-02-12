@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.exceptions.base;
 
 /**
- * Excepción para violaciones de reglas de negocio
+ * Exception for business rule violations
  */
 public class BusinessRuleException extends DomainException {
     

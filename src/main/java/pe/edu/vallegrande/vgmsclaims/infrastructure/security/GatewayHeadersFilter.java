@@ -10,8 +10,8 @@ import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
 
 /**
- * Filtro que extrae la información del usuario desde los headers del gateway
- * y la coloca en el contexto reactivo para uso posterior
+ * Filter that extracts user information from gateway headers
+ * and places it in the reactive context for later use.
  */
 @Slf4j
 @Component
@@ -19,7 +19,7 @@ import reactor.util.context.Context;
 public class GatewayHeadersFilter implements WebFilter {
 
     public static final String USER_CONTEXT_KEY = "authenticatedUser";
-    
+
     private final GatewayHeadersExtractor headersExtractor;
 
     @Override
@@ -31,7 +31,7 @@ public class GatewayHeadersFilter implements WebFilter {
     }
 
     /**
-     * Obtiene el usuario autenticado desde el contexto reactivo
+     * Gets the authenticated user from the reactive context.
      */
     public static Mono<AuthenticatedUser> getCurrentUser() {
         return Mono.deferContextual(ctx -> {
@@ -43,14 +43,14 @@ public class GatewayHeadersFilter implements WebFilter {
     }
 
     /**
-     * Obtiene el ID del usuario actual desde el contexto reactivo
+     * Gets the current user ID from the reactive context.
      */
     public static Mono<String> getCurrentUserId() {
         return getCurrentUser().map(AuthenticatedUser::getUserId);
     }
 
     /**
-     * Obtiene el ID de la organización actual desde el contexto reactivo
+     * Gets the current organization ID from the reactive context.
      */
     public static Mono<String> getCurrentOrganizationId() {
         return getCurrentUser().map(AuthenticatedUser::getOrganizationId);

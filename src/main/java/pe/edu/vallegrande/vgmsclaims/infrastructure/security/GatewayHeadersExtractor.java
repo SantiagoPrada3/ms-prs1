@@ -11,26 +11,26 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Extrae información del usuario autenticado desde los headers del gateway
+ * Extracts authenticated user information from gateway headers.
  */
 @Slf4j
 @Component
 public class GatewayHeadersExtractor {
 
-    // Headers personalizados del gateway
+    // Headers personalizados of the gateway
     public static final String HEADER_USER_ID = "X-User-Id";
     public static final String HEADER_EMAIL = "X-User-Email";
     public static final String HEADER_ORGANIZATION_ID = "X-Organization-Id";
     public static final String HEADER_ROLES = "X-User-Roles";
 
     /**
-     * Extrae el usuario autenticado desde los headers de la petición
+     * Extracts authenticated user from request headers.
      */
     public Optional<AuthenticatedUser> extractUser(ServerHttpRequest request) {
         String userId = getHeader(request, HEADER_USER_ID);
-        
+
         if (userId == null || userId.isEmpty()) {
-            log.debug("No se encontró header de usuario autenticado");
+            log.debug("Authenticated user header not found");
             return Optional.empty();
         }
 
@@ -41,12 +41,12 @@ public class GatewayHeadersExtractor {
                 .roles(parseCommaSeparated(getHeader(request, HEADER_ROLES)))
                 .build();
 
-        log.debug("Usuario extraído de headers: {} (org: {})", user.getUserId(), user.getOrganizationId());
+        log.debug("User extracted from headers: {} (org: {})", user.getUserId(), user.getOrganizationId());
         return Optional.of(user);
     }
 
     /**
-     * Extrae el ID del usuario desde los headers
+     * Extracts user ID from request headers.
      */
     public Optional<String> extractUserId(ServerHttpRequest request) {
         return Optional.ofNullable(getHeader(request, HEADER_USER_ID))
@@ -54,7 +54,7 @@ public class GatewayHeadersExtractor {
     }
 
     /**
-     * Extrae el ID de la organización desde los headers
+     * Extracts organization ID from request headers.
      */
     public Optional<String> extractOrganizationId(ServerHttpRequest request) {
         return Optional.ofNullable(getHeader(request, HEADER_ORGANIZATION_ID))
@@ -62,7 +62,7 @@ public class GatewayHeadersExtractor {
     }
 
     /**
-     * Extrae los roles desde los headers
+     * Extracts roles from request headers.
      */
     public List<String> extractRoles(ServerHttpRequest request) {
         return parseCommaSeparated(getHeader(request, HEADER_ROLES));

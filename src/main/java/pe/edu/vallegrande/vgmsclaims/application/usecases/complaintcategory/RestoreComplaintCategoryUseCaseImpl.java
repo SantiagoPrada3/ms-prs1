@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso de restaurar categoría de queja
+ * Use case implementation for restoring complaint categories
  */
 @Slf4j
 @Service

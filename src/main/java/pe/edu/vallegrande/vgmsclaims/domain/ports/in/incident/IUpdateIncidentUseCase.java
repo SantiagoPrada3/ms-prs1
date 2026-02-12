@@ -4,15 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Incident;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de actualizar incidente
+ * Input port for the update incident use case
  */
 public interface IUpdateIncidentUseCase {
     
     /**
-     * Actualiza un incidente existente
-     * @param id identificador del incidente
-     * @param incident datos actualizados del incidente
-     * @return el incidente actualizado
+     * Updates an incident existing
+     * @param id identifier of the incident
+     * @param incident updated incident data
+     * @return the updated incident
      */
     Mono<Incident> execute(String id, Incident incident);
 }

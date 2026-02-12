@@ -13,7 +13,7 @@ import java.time.Instant;
 import java.util.List;
 
 /**
- * Documento MongoDB para resoluciones de incidentes
+ * MongoDB document for incident resolutions
  */
 @Data
 @Builder

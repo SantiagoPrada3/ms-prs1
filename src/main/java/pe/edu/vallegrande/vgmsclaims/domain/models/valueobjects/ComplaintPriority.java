@@ -1,7 +1,7 @@
 package pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects;
 
 /**
- * Enum que representa la prioridad de una queja
+ * Enum representing the priority of a complaint
  */
 public enum ComplaintPriority {
     LOW,

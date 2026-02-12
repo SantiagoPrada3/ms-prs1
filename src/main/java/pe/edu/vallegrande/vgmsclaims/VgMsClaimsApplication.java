@@ -4,16 +4,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Aplicación principal del microservicio de Quejas e Incidentes
- * 
- * Este microservicio gestiona:
- * - Quejas de clientes sobre el servicio de agua
- * - Incidentes técnicos de infraestructura
- * 
- * Arquitectura: Hexagonal (Ports & Adapters)
- * Framework: Spring Boot WebFlux (Reactivo)
- * Base de datos: MongoDB
- * Mensajería: RabbitMQ
+ * Main application for the Claims and Incidents microservice.
+ *
+ * This microservice manages:
+ * - Customer complaints about water service
+ * - Technical infrastructure incidents
+ *
+ * Architecture: Hexagonal (Ports & Adapters)
+ * Framework: Spring Boot WebFlux (Reactive)
+ * Database: MongoDB
+ * Messaging: RabbitMQ
  */
 @SpringBootApplication
 public class VgMsClaimsApplication {

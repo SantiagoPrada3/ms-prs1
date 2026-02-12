@@ -6,14 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * DTO para actualizar un tipo de incidente existente
+ * DTO to update an existing incident type.
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateIncidentTypeRequest {
-    
+
     private String typeName;
     private String description;
     private String priorityLevel;

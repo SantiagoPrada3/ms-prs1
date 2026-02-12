@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para asignar incidentes
+ * Use case implementation for assigning incidents
  */
 @Slf4j
 @Service
@@ -29,7 +29,7 @@ public class AssignIncidentUseCaseImpl implements IAssignIncidentUseCase {
     
     @Override
     public Mono<Incident> execute(String incidentId, String userId) {
-        log.info("Asignando incidente {} al usuario {}", incidentId, userId);
+        log.info("Assigning incident {} al user {}", incidentId, userId);
         
         return incidentRepository.findById(incidentId)
                 .switchIfEmpty(Mono.error(new IncidentNotFoundException(incidentId)))
@@ -37,16 +37,16 @@ public class AssignIncidentUseCaseImpl implements IAssignIncidentUseCase {
                     if (!incident.canBeAssigned()) {
                         return Mono.error(new BusinessRuleException(
                                 "INVALID_STATE",
-                                "El incidente no puede ser asignado en su estado actual"));
+                                "The incident cannot be assigned in its current state"));
                     }
                     
-                    // Verificar que el usuario existe
+                    // Checksr que el user existe
                     return userServiceClient.existsUser(userId)
                             .flatMap(exists -> {
                                 if (!exists) {
                                     return Mono.error(new BusinessRuleException(
                                             "USER_NOT_FOUND",
-                                            "El usuario asignado no existe"));
+                                            "The assigned user does not exist"));
                                 }
                                 
                                 incident.assignTo(userId);
@@ -54,10 +54,10 @@ public class AssignIncidentUseCaseImpl implements IAssignIncidentUseCase {
                             });
                 })
                 .doOnSuccess(saved -> {
-                    log.info("Incidente asignado: {} -> {}", saved.getIncidentCode(), userId);
+                    log.info("Incident assigned: {} -> {}", saved.getIncidentCode(), userId);
                     publishIncidentAssignedEvent(saved);
                 })
-                .doOnError(error -> log.error("Error al asignar incidente: {}", error.getMessage()));
+                .doOnError(error -> log.error("Error assigning incident: {}", error.getMessage()));
     }
     
     private void publishIncidentAssignedEvent(Incident incident) {
@@ -71,7 +71,7 @@ public class AssignIncidentUseCaseImpl implements IAssignIncidentUseCase {
                     .build();
             eventPublisher.publishIncidentAssigned(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de incidente asignado: {}", e.getMessage());
+            log.warn("Could not publish incident assigned event: {}", e.getMessage());
         }
     }
 }

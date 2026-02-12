@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * Evento emitido cuando se cierra una queja
+ * Event emitted when a complaint is closed
  */
 @Data
 @Builder

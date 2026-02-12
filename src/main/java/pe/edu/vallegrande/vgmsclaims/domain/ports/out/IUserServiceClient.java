@@ -5,35 +5,35 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 /**
- * Puerto de salida para el cliente del servicio de usuarios
+ * Output port for the user service client
  */
 public interface IUserServiceClient {
     
     /**
-     * Obtiene información de un usuario por su ID
-     * @param userId identificador del usuario
-     * @return datos del usuario
+     * Gets user information by ID
+     * @param userId identifier of the user
+     * @return user data
      */
     Mono<Map<String, Object>> getUserById(String userId);
     
     /**
-     * Obtiene información de un usuario por su email
-     * @param email email del usuario
-     * @return datos del usuario
+     * Gets user information by email
+     * @param email email of the user
+     * @return user data
      */
     Mono<Map<String, Object>> getUserByEmail(String email);
     
     /**
-     * Verifica si un usuario existe
-     * @param userId identificador del usuario
-     * @return true si existe
+     * Checks if a user exists
+     * @param userId identifier of the user
+     * @return true if it exists
      */
     Mono<Boolean> existsUser(String userId);
     
     /**
-     * Obtiene usuarios de una organización
-     * @param organizationId identificador de la organización
-     * @return lista de usuarios
+     * Gets users of an organization
+     * @param organizationId identifier of the organization
+     * @return list of users
      */
     Mono<java.util.List<Map<String, Object>>> getUsersByOrganization(String organizationId);
 }

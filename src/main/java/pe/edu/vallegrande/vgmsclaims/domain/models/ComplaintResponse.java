@@ -9,8 +9,8 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.valueobjects.ResponseType;
 import java.time.Instant;
 
 /**
- * Entidad de dominio que representa una Respuesta a Queja.
- * No contiene anotaciones de infraestructura.
+ * Domain entity representing a Complaint Response.
+ * Does not contain infrastructure annotations.
  */
 @Data
 @Builder

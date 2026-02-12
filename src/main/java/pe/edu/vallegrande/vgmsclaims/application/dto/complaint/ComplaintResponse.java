@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 
 /**
- * DTO de respuesta para quejas
+ * Response DTO for complaints.
  */
 @Data
 @Builder
@@ -17,7 +17,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ComplaintResponse {
-    
+
     private String id;
     private String organizationId;
     private String complaintCode;

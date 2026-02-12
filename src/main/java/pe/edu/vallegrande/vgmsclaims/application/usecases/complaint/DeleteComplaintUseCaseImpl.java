@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import java.time.Instant;
 
 /**
- * Implementación del caso de uso para eliminar (soft delete) quejas
+ * Use case implementation for soft deleting complaints
  */
 @Slf4j
 @Service
@@ -24,7 +24,7 @@ public class DeleteComplaintUseCaseImpl implements IDeleteComplaintUseCase {
     
     @Override
     public Mono<Complaint> execute(String id) {
-        log.info("Eliminando queja con ID: {}", id);
+        log.info("Deleting complaint with ID: {}", id);
         
         return complaintRepository.findById(id)
                 .switchIfEmpty(Mono.error(new ComplaintNotFoundException(id)))
@@ -33,7 +33,7 @@ public class DeleteComplaintUseCaseImpl implements IDeleteComplaintUseCase {
                     complaint.setUpdatedAt(Instant.now());
                     return complaintRepository.save(complaint);
                 })
-                .doOnSuccess(deleted -> log.info("Queja eliminada (soft delete): {}", deleted.getComplaintCode()))
-                .doOnError(error -> log.error("Error al eliminar queja: {}", error.getMessage()));
+                .doOnSuccess(deleted -> log.info("Complaint deleted (soft delete): {}", deleted.getComplaintCode()))
+                .doOnError(error -> log.error("Error deleting complaint: {}", error.getMessage()));
     }
 }

@@ -4,15 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.IncidentType;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de actualizar tipo de incidente
+ * Input port for the update incident type use case
  */
 public interface IUpdateIncidentTypeUseCase {
     
     /**
-     * Actualiza un tipo de incidente existente
-     * @param id identificador del tipo de incidente
-     * @param incidentType datos actualizados del tipo de incidente
-     * @return el tipo de incidente actualizado
+     * Updates an incident type existing
+     * @param id identifier of the incident type
+     * @param incidentType updated data of the incident type
+     * @return the updated incident type
      */
     Mono<IncidentType> execute(String id, IncidentType incidentType);
 }

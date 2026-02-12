@@ -4,15 +4,15 @@ import pe.edu.vallegrande.vgmsclaims.domain.models.Complaint;
 import reactor.core.publisher.Mono;
 
 /**
- * Puerto de entrada para el caso de uso de actualizar queja
+ * Input port for the update complaint use case
  */
 public interface IUpdateComplaintUseCase {
     
     /**
-     * Actualiza una queja existente
-     * @param id identificador de la queja
-     * @param complaint datos actualizados de la queja
-     * @return la queja actualizada
+     * Updates an existing complaint
+     * @param id identifier of the complaint
+     * @param complaint updated complaint data
+     * @return the updated complaint
      */
     Mono<Complaint> execute(String id, Complaint complaint);
 }

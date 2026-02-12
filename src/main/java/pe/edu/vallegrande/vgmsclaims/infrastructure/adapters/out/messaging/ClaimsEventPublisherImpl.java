@@ -1,15 +1,15 @@
- package pe.edu.vallegrande.vgmsclaims.infrastructure.adapters.out.messaging;
+package pe.edu.vallegrande.vgmsclaims.infrastructure.adapters.out.messaging;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import pe.edu.vallegrande.vgmsclaims.domain.ports.out.IClaimsEventPublisher;
+import pe.edu.vallegrande.vgmsclaims.infrastructure.config.RabbitMQConfig;
 
 /**
- * Implementación del publicador de eventos usando RabbitMQ
+ * Event publisher implementation using RabbitMQ.
  */
 @Slf4j
 @Component
@@ -18,9 +18,6 @@ public class ClaimsEventPublisherImpl implements IClaimsEventPublisher {
 
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
-
-    @Value("${rabbitmq.exchange.claims:claims-exchange}")
-    private String claimsExchange;
 
     @Override
     public void publishComplaintCreated(Object event) {
@@ -75,10 +72,10 @@ public class ClaimsEventPublisherImpl implements IClaimsEventPublisher {
     private void publishEvent(String routingKey, Object event) {
         try {
             String message = objectMapper.writeValueAsString(event);
-            rabbitTemplate.convertAndSend(claimsExchange, routingKey, message);
-            log.info("Evento publicado: {} -> {}", routingKey, event.getClass().getSimpleName());
+            rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, routingKey, message);
+            log.info("Event published: {} -> {}", routingKey, event.getClass().getSimpleName());
         } catch (Exception e) {
-            log.error("Error publicando evento {}: {}", routingKey, e.getMessage());
+            log.error("Error publishing event {}: {}", routingKey, e.getMessage());
         }
     }
 }

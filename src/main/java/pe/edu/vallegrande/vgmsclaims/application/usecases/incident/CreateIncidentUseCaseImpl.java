@@ -18,7 +18,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Implementación del caso de uso para crear incidentes
+ * Use case implementation for creating incidents
  */
 @Slf4j
 @Service
@@ -31,12 +31,12 @@ public class CreateIncidentUseCaseImpl implements ICreateIncidentUseCase {
     
     @Override
     public Mono<Incident> execute(Incident incident) {
-        log.info("Creando nuevo incidente: {}", incident.getTitle());
+        log.info("Creando new incident: {}", incident.getTitle());
         
         return securityContext.getCurrentUserId()
                 .defaultIfEmpty("system")
                 .flatMap(userId -> {
-                    // Establecer valores por defecto solo si no están definidos
+                    // Set default values only if not defined
                     if (incident.getIncidentCode() == null || incident.getIncidentCode().isEmpty()) {
                         incident.setIncidentCode(generateIncidentCode());
                     }
@@ -61,15 +61,15 @@ public class CreateIncidentUseCaseImpl implements ICreateIncidentUseCase {
                     
                     return incidentRepository.save(incident)
                             .doOnSuccess(saved -> {
-                                log.info("Incidente creado exitosamente: {}", saved.getIncidentCode());
+                                log.info("Incident created successfully: {}", saved.getIncidentCode());
                                 publishIncidentCreatedEvent(saved);
                                 
-                                // Alerta si es crítico
+                                // Alert if critical
                                 if (saved.isCritical()) {
                                     publishUrgentIncidentAlert(saved);
                                 }
                             })
-                            .doOnError(error -> log.error("Error al crear incidente: {}", error.getMessage()));
+                            .doOnError(error -> log.error("Error creating incident: {}", error.getMessage()));
                 });
     }
     
@@ -90,7 +90,7 @@ public class CreateIncidentUseCaseImpl implements ICreateIncidentUseCase {
                     .build();
             eventPublisher.publishIncidentCreated(event);
         } catch (Exception e) {
-            log.warn("No se pudo publicar evento de incidente creado: {}", e.getMessage());
+            log.warn("Could not publish incident created event: {}", e.getMessage());
         }
     }
     
@@ -106,9 +106,9 @@ public class CreateIncidentUseCaseImpl implements ICreateIncidentUseCase {
                     .alertTime(Instant.now())
                     .build();
             eventPublisher.publishUrgentIncidentAlert(event);
-            log.warn("ALERTA: Incidente CRÍTICO creado: {}", incident.getIncidentCode());
+            log.warn("ALERT: CRITICAL incident created: {}", incident.getIncidentCode());
         } catch (Exception e) {
-            log.warn("No se pudo publicar alerta de incidente urgente: {}", e.getMessage());
+            log.warn("Could not publish urgent incident alert: {}", e.getMessage());
         }
     }
 }

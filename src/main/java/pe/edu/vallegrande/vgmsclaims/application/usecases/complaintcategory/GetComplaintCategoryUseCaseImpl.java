@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * Implementación del caso de uso de obtener categorías de queja
+ * Use case implementation for getting complaint categories
  */
 @Slf4j
 @Service
